@@ -47,7 +47,7 @@ var initDb = function(callback) {
   var mongodb = require('mongodb');
   if (mongodb == null) return;
 
-  //mongoURL = 'mongodb://localhost:27017/test';
+  mongoURL = 'mongodb://localhost:27017/test';
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
       callback(err);
@@ -66,6 +66,7 @@ var initDb = function(callback) {
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
+  console.log(db);
   if (!db) {
     initDb(function(err){});
   }
@@ -91,10 +92,10 @@ app.post('/login', urlEncodedParser, function(req, res) {
   db.collection('profiles').find({'username': uname, 'password': upass})
       .toArray(function(err, result) {
         if (result == []) {
-          res.send('Sorry you are not in database! You should signup!');
+          res.redirect('/test');
         }
         else {
-          res.send(JSON.stringify(result));
+          res.redirect('/test2');
         }
   });
 });
@@ -107,7 +108,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
   let profiles = db.collection('profiles');
   console.log(dbDetails);
   profiles.insert({'username': uname, 'password': upass });
-  res.send('Succesful sign up!');
+  res.redirect('/test2');
 });
 
 app.get('/dbase', function(req, res) {
