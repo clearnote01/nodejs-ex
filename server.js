@@ -3,8 +3,12 @@ var express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
-    morgan  = require('morgan');
+    morgan  = require('morgan'),
+    bodyparser = require('body-parser');
     
+var urlEncodedParser = bodyparser.urlencoded({extended:false});
+var jsonParser = bodyparser.json()
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -76,6 +80,33 @@ app.get('/', function (req, res) {
   }
 });
 
+app.post('/login', urlEncodedParser, function(req, res) {
+  console.log('page opened');
+  let uname = req.body.logname;
+  let upass = req.body.logpass;
+  console.log("USER NAME: " + uname);
+  console.log("PASSWORD: " + upass);
+
+  db.collection('profiles').find({'username': uname, 'password': upass})
+      .toArray(function(err, result) {
+        if (result == []) {
+          res.send('Sorry you are not in database! You should signup!');
+        }
+        else {
+          res.send(JSON.stringify(result));
+        }
+  });
+});
+
+app.post('/signup', urlEncodedParser, function(req, res) {
+  let uname = req.body.signname;
+  let upass = req.body.signpass;
+  
+  let profiles = db.collection('profiles');
+  profiles.insert({'username': uname, 'password': upass });
+  res.send('Succesful sign up!');
+});
+
 app.get('/dbase', function(req, res) {
   console.log(db);
 });
@@ -105,6 +136,7 @@ app.get('/pagecount', function (req, res) {
     res.send('{ pageCount: -1 }');
   }
 });
+
 
 // error handling
 app.use(function(err, req, res, next){
