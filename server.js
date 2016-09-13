@@ -47,6 +47,7 @@ var initDb = function(callback) {
   var mongodb = require('mongodb');
   if (mongodb == null) return;
 
+  //mongoURL = 'mongodb://localhost:27017/test';
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
       callback(err);
@@ -99,10 +100,12 @@ app.post('/login', urlEncodedParser, function(req, res) {
 });
 
 app.post('/signup', urlEncodedParser, function(req, res) {
+  console.log('signup page opend');
   let uname = req.body.signname;
   let upass = req.body.signpass;
   
   let profiles = db.collection('profiles');
+  console.log(dbDetails);
   profiles.insert({'username': uname, 'password': upass });
   res.send('Succesful sign up!');
 });
