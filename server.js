@@ -77,7 +77,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/dbase', function(req, res) {
-  res.send(db);
+  console.log(db);
 });
 
 app.get('/test', function(req, res) {
