@@ -42,12 +42,12 @@ var db = null,
     dbDetails = new Object();
 
 var initDb = function(callback) {
+  //mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
   if (mongodb == null) return;
 
-  //mongoURL = 'mongodb://localhost:27017/test';
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
       callback(err);
@@ -81,31 +81,31 @@ app.get('/', function (req, res) {
   }
 });
 
-app.post('/login', urlEncodedParser, function(req, res) {
-  //console.log('page opene!');
-  let uname = req.body.logname;
-  let upass = req.body.logpass;
+//app.post('/login', urlEncodedParser, function(req, res) {
+  ////console.log('page opene!');
+  //let uname = req.body.logname;
+  //let upass = req.body.logpass;
   //console.log("USER NAME: " + uname);
   //console.log("PASSWORD: " + upass);
 
-  db.collection('profiles').find({'username': uname, 'password': upass})
-      .toArray(function(err, result) {
-        console.log(result);
-        if (result.length!==0) {
-          res.redirect('/test');
-        }
-        else {
-          res.redirect('/test2');
-        }
-  });
-});
+  //db.collection('profiles').find({'username': uname, 'password': upass})
+      //.toArray(function(err, result) {
+        //console.log(result);
+        //if (result.length!==0) {
+          //res.redirect('/test');
+        //}
+        //else {
+          //res.redirect('/test2');
+        //}
+  //});
+//});
 
 app.post('/signup', urlEncodedParser, function(req, res) {
-  let uname = req.body.signname;
-  let upass = req.body.signpass;
+  //let uname = req.body.signname;
+  //let upass = req.body.signpass;
   
-  let profiles = db.collection('profiles');
-  profiles.insert({'username': uname, 'password': upass });
+  //let profiles = db.collection('profiles');
+  //profiles.insert({'username': uname, 'password': upass });
   res.redirect('/test2');
 });
 
