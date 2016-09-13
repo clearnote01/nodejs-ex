@@ -66,7 +66,6 @@ var initDb = function(callback) {
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
-  console.log(db);
   if (!db) {
     initDb(function(err){});
   }
@@ -82,34 +81,34 @@ app.get('/', function (req, res) {
   }
 });
 
-app.post('/login', urlEncodedParser, function(req, res) {
-  console.log('page opened');
-  let uname = req.body.logname;
-  let upass = req.body.logpass;
-  console.log("USER NAME: " + uname);
-  console.log("PASSWORD: " + upass);
+//app.post('/login', urlEncodedParser, function(req, res) {
+  //console.log('page opened');
+  //let uname = req.body.logname;
+  //let upass = req.body.logpass;
+  //console.log("USER NAME: " + uname);
+  //console.log("PASSWORD: " + upass);
 
-  db.collection('profiles').find({'username': uname, 'password': upass})
-      .toArray(function(err, result) {
-        if (result == []) {
-          res.redirect('/test');
-        }
-        else {
-          res.redirect('/test2');
-        }
-  });
-});
+  //db.collection('profiles').find({'username': uname, 'password': upass})
+      //.toArray(function(err, result) {
+        //if (result == []) {
+          //res.redirect('/test');
+        //}
+        //else {
+          //res.redirect('/test2');
+        //}
+  //});
+//});
 
-app.post('/signup', urlEncodedParser, function(req, res) {
-  console.log('signup page opend');
-  let uname = req.body.signname;
-  let upass = req.body.signpass;
+//app.post('/signup', urlEncodedParser, function(req, res) {
+  //console.log('signup page opend');
+  //let uname = req.body.signname;
+  //let upass = req.body.signpass;
   
-  let profiles = db.collection('profiles');
-  console.log(dbDetails);
-  profiles.insert({'username': uname, 'password': upass });
-  res.redirect('/test2');
-});
+  //let profiles = db.collection('profiles');
+  //console.log(dbDetails);
+  //profiles.insert({'username': uname, 'password': upass });
+  //res.redirect('/test2');
+//});
 
 app.get('/dbase', function(req, res) {
   console.log(db);
