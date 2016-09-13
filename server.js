@@ -85,7 +85,10 @@ app.get('/test', function(req, res) {
 });
 
 app.get('/test2', function(req, res) {
-  res.send(dbDetails);
+  var col = db.collection('counts');
+  col.find().toArray(function(err, result) {
+    res.send(JSON.stringify(result));
+  });
 });
 
 app.get('/pagecount', function (req, res) {
