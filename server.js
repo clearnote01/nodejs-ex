@@ -99,14 +99,14 @@ app.get('/', function (req, res) {
   //});
 //});
 
-app.post('/signup', urlEncodedParser, function(req, res) {
-  let uname = req.body.signname;
-  let upass = req.body.signpass;
+//app.post('/signup', urlEncodedParser, function(req, res) {
+  //let uname = req.body.signname;
+  //let upass = req.body.signpass;
   
-  let profiles = db.collection('profiles');
-  profiles.insert({'username': uname, 'password': upass });
-  res.redirect('/test2');
-});
+  //let profiles = db.collection('profiles');
+  //profiles.insert({'username': uname, 'password': upass });
+  //res.redirect('/test2');
+//});
 
 app.get('/dbase', function(req, res) {
   console.log(db);
