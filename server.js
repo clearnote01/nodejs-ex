@@ -70,17 +70,17 @@ var initDb = function(callback) {
 };
 
 // Helper functions for dbase !!
-function getUserInfo(var db_uname, var db_password) {
-  var profiles = db.collection('profiles');
-  profiles.find({'username': db_uname, 'password': db_password }).toArray(function(err, result) {
-    if ( result.length == 0 ) {
-      return 0;
-    }
-    else {
-      return result;
-    }
-  });
-}
+//function getUserInfo(var db_uname, var db_password) {
+  //var profiles = db.collection('profiles');
+  //profiles.find({'username': db_uname, 'password': db_password }).toArray(function(err, result) {
+    //if ( result.length == 0 ) {
+      //return 0;
+    //}
+    //else {
+      //return result;
+    //}
+  //});
+//}
 // Routes are defined here!!
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
@@ -177,12 +177,7 @@ app.get('/test2', function(req, res) {
 });
 
 app.get('/main', function(req,res) {
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    res.render('main.html', { username: name, userresult: JSON.stringify(user_result) });
-  }
+  res.render('main.html', { username: name, userresult: JSON.stringify(user_result) });
 });
 
 app.get('/pagecount', function (req, res) {
