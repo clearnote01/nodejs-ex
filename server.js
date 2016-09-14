@@ -118,27 +118,28 @@ app.post('/signup', function(req, res) {
     initDb(function(err){});
   }
   if (db) {
-    let uname = req.body.signname;
-    let upass = req.body.signpass;
+    var uname = req.body.signname;
+    var upass = req.body.signpass;
+    var name = uname;
     
-    var profiles = db.collection('profiles');
-    profiles.insert(
-      {'username': uname, 'password': upass, 
-        'question_new': 
-        {
-          'weight': [],
-          'height': [],
-          'job': null,
-          'age': null,
-          'gender': null
-        }, 
-        'question_existing':
-        {
-          'working_hrs': 0 
-        } 
-    });
+    //var profiles = db.collection('profiles');
+    //profiles.insert(
+      //{'username': uname, 'password': upass, 
+        //'question_new': 
+        //{
+          //'weight': [],
+          //'height': [],
+          //'job': null,
+          //'age': null,
+          //'gender': null
+        //}, 
+        //'question_existing':
+        //{
+          //'working_hrs': 0 
+        //} 
+    //});
 
-    res.redirect('/test2');
+    res.redirect('/main');
   }
 });
 
