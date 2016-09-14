@@ -111,17 +111,13 @@ app.post('/login', urlEncodedParser, function(req, res) {
     console.log("USER NAME: " + uname);
     console.log("PASSWORD: " + upass);
 
-    db.collection('profiles').find({'username': uname, 'password': upass}).toArray(function(err, result) {
-      name = err;
-      if (result.length==0) {
-        res.redirect('/main');
-      }
-      else {
-        name = uname;
-        user_result = result;
-        res.redirect('/main');
-      }
-    });
+    user_result = getUserInfo(uname, upass);
+    if (user_result == 0) {
+      res.redirect('/');
+    }
+    else {
+      res.redirect('/main');
+    }
   }
 });
 
