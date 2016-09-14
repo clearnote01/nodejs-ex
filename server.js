@@ -16,7 +16,7 @@ Object.assign=require('object-assign')
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
 app.use('/static', express.static(__dirname+'/public'));
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -48,7 +48,7 @@ var db = null,
     user_result = null;
 
 var initDb = function(callback) {
-  //mongoURL = 'mongodb://localhost:27017/test';
+  mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -113,14 +113,15 @@ app.get('/', function (req, res) {
   //}
 //});
 
-app.post('/signup', function(req, res) {
+app.post('/signup', urlEncodedParser, function(req, res) {
   if (!db) {
     initDb(function(err){});
   }
   if (db) {
     var uname = req.body.signname;
     var upass = req.body.signpass;
-    var name = uname;
+    name = uname;
+    console.log(uname+upass);
     
     //var profiles = db.collection('profiles');
     //profiles.insert(
