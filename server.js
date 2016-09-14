@@ -154,7 +154,7 @@ app.get('/test2', function(req, res) {
     initDb(function(err){});
   }
   if (db) {
-    var col = db.collection('counts');
+    var col = db.collection('profiles');
     col.find().toArray(function(err, result) {
       res.send(JSON.stringify(result));
     });
