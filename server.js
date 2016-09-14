@@ -69,6 +69,19 @@ var initDb = function(callback) {
   });
 };
 
+// Helper functions for dbase !!
+function getUserInfo(var db_uname, var db_password) {
+  var profiles = db.collection('profiles');
+  profiles.find({'username': db_uname, 'password': db_password }).toArray(function(err, result) {
+    if ( result.length == 0 ) {
+      return 0;
+    }
+    else {
+      return result;
+    }
+  });
+}
+// Routes are defined here!!
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
@@ -93,8 +106,8 @@ app.post('/login', urlEncodedParser, function(req, res) {
     initDb(function(err){});
   }
   if (db) {
-    var uname = req.body.logname;
-    var upass = req.body.logpass;
+    let uname = req.body.logname;
+    let upass = req.body.logpass;
     console.log("USER NAME: " + uname);
     console.log("PASSWORD: " + upass);
 
@@ -168,24 +181,6 @@ app.get('/main', function(req,res) {
     initDb(function(err){});
   }
   if (db) {
-    var profiles = db.collection('profiles');
-    var uname = 'raju',
-        upass = 'raju';
-    profiles.insert(
-      {'username': uname, 'password': upass, 
-        'question_new': 
-        {
-          'weight': [],
-          'height': [],
-          'job': null,
-          'age': null,
-          'gender': null
-        }, 
-        'question_existing':
-        {
-          'working_hrs': 0 
-        } 
-    });
     res.render('main.html', { username: name, userresult: JSON.stringify(user_result) });
   }
 });
