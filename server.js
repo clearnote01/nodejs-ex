@@ -45,7 +45,9 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 var db = null,
     dbDetails = new Object(),
     name = null,
-    user_result = null;
+    user_result = null,
+    uname = null,
+    upass = null;
 
 var initDb = function(callback) {
   //mongoURL = 'mongodb://localhost:27017/test';
@@ -70,17 +72,32 @@ var initDb = function(callback) {
 };
 
 // Helper functions for dbase !!
-var getUserInfo = function (db_uname,db_password) {
+var getUserInfo = function (db_uname,db_password, res, loginsuccesscallback, loginfailcallback, failmessage) {
   var profiles = db.collection('profiles');
   profiles.find({'username': db_uname, 'password': db_password }).toArray(function(err, result) {
+    console.log('RESULT BELOW');
+    console.log(result)
     if ( result.length == 0 ) {
-      return 0;
+      loginfailcallback(res,failmessage);
     }
     else {
-      return result;
+      user_result = result[0];
+      loginsuccesscallback(res, user_result);
     }
   });
+  return user_result;
 }
+
+var loginfailcallback = function(res, failmessage) {
+  res.end(failmessage);
+}
+
+var userlogincallback = function(res,user_result) {
+  console.log('USER RESULT');
+  console.log(user_result);
+  res.redirect('/main');
+}
+
 // Routes are defined here!!
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
@@ -102,26 +119,24 @@ app.get('/', function (req, res) {
 
 app.post('/login', urlEncodedParser, function(req, res) {
   //console.log('page opene!');
+  user_result = null;
   if (!db) {
     initDb(function(err){});
   }
   if (db) {
-    var uname = req.body.logname;
-    var upass = req.body.logpass;
+    uname = req.body.logname;
+    upass = req.body.logpass;
     console.log("USER NAME: " + uname);
     console.log("PASSWORD: " + upass);
 
-    user_result = getUserInfo(uname, upass);
-    if (user_result == 0) {
-      res.redirect('/');
-    }
-    else {
-      res.redirect('/main');
-    }
+    var failloginmessage = 'wrong username or password. try again';
+    //login everything;
+    getUserInfo(uname, upass, res, userlogincallback, loginfailcallback, failloginmessage);
   }
 });
 
 app.post('/signup', urlEncodedParser, function(req, res) {
+  user_result = null;
   if (!db) {
     initDb(function(err){});
   }
@@ -132,23 +147,27 @@ app.post('/signup', urlEncodedParser, function(req, res) {
     console.log(uname+upass);
     
     var profiles = db.collection('profiles');
-    profiles.insert(
-      {'username': uname, 'password': upass, 
-        'question_new': 
-        {
-          'weight': [],
-          'height': [],
-          'job': null,
-          'age': null,
-          'gender': null
-        }, 
-        'question_existing':
-        {
-          'working_hrs': 0 
-        } 
-    });
-
-    res.redirect('/main');
+    var loginfaildosignup = function(res, failmessage) {
+      profiles.insert({
+          'username': uname, 'password': upass, 
+          'question_new': 
+            {
+              'weight': null,
+              'height': null,
+              'when_it_all_started': Date.now(),
+              'job': null,
+              'age': null,
+              'gender': null,
+            }, 
+          'question_existing':
+            {
+              'working_hrs': 0 
+            } 
+      });
+      res.end(failmessage);
+    }
+    var failloginmessage = 'Happy sing-in new user!!';
+    getUserInfo(uname, upass, res, userlogincallback, loginfaildosignup, failloginmessage);
   }
 });
 
@@ -173,6 +192,7 @@ app.get('/test2', function(req, res) {
 });
 
 app.get('/main', function(req,res) {
+  console.log(JSON.stringify(user_result));
   res.render('main.html', { username: name, userresult: JSON.stringify(user_result) });
 });
 
