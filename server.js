@@ -14,8 +14,9 @@ var jsonParser = bodyparser.json()
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'))
-app.use('/static', express.static(__dirname+'/public'))
+app.use(morgan('combined'));
+app.use('/static', express.static(__dirname+'/public'));
+app.use(express.bodyParser());
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -112,34 +113,34 @@ app.get('/', function (req, res) {
   //}
 //});
 
-//app.post('/signup', urlEncodedParser, function(req, res) {
-  //if (!db) {
-    //initDb(function(err){});
-  //}
-  //if (db) {
-    //let uname = req.body.signname;
-    //let upass = req.body.signpass;
+app.post('/signup', function(req, res) {
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    let uname = req.body.signname;
+    let upass = req.body.signpass;
     
-    ////var profiles = db.collection('profiles');
-    ////profiles.insert(
-      ////{'username': uname, 'password': upass, 
-        ////'question_new': 
-        ////{
-          ////'weight': [],
-          ////'height': [],
-          ////'job': null,
-          ////'age': null,
-          ////'gender': null
-        ////}, 
-        ////'question_existing':
-        ////{
-          ////'working_hrs': 0 
-        ////} 
-    ////});
+    var profiles = db.collection('profiles');
+    profiles.insert(
+      {'username': uname, 'password': upass, 
+        'question_new': 
+        {
+          'weight': [],
+          'height': [],
+          'job': null,
+          'age': null,
+          'gender': null
+        }, 
+        'question_existing':
+        {
+          'working_hrs': 0 
+        } 
+    });
 
-    //res.redirect('/test2');
-  //}
-//});
+    res.redirect('/test2');
+  }
+});
 
 app.get('/dbase', function(req, res) {
   console.log(db);
