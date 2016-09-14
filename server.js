@@ -145,28 +145,28 @@ app.get('/test2', function(req, res) {
   });
 });
 
-app.get('/main', function(req,res) {
-  var profiles = db.collection('profiles');
+//app.get('/main', function(req,res) {
+  //var profiles = db.collection('profiles');
+  ////profiles.insert(
+  //var uname = 'raju',
+      //upass = 'raju';
   //profiles.insert(
-  var uname = 'raju',
-      upass = 'raju';
-  profiles.insert(
-    {'username': uname, 'password': upass, 
-      'question_new': 
-      {
-        'weight': [],
-        'height': [],
-        'job': null,
-        'age': null,
-        'gender': null
-      }, 
-      'question_existing':
-      {
-        'working_hrs': 0 
-      } 
-  });
-  res.render('main.html', { username: name, userresult: JSON.stringify(user_result) });
-});
+    //{'username': uname, 'password': upass, 
+      //'question_new': 
+      //{
+        //'weight': [],
+        //'height': [],
+        //'job': null,
+        //'age': null,
+        //'gender': null
+      //}, 
+      //'question_existing':
+      //{
+        //'working_hrs': 0 
+      //} 
+  //});
+  //res.render('main.html', { username: name, userresult: JSON.stringify(user_result) });
+//});
 
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
