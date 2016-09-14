@@ -4,7 +4,9 @@ var express = require('express'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan'),
-    bodyparser = require('body-parser');
+    bodyparser = require('body-parser'),
+    server = require('http').Server(app),
+    io = require('socket.io')(server);
     
 var urlEncodedParser = bodyparser.urlencoded({extended:false});
 var jsonParser = bodyparser.json()
@@ -44,7 +46,7 @@ var db = null,
     user_result = null;
 
 var initDb = function(callback) {
-  mongoURL = 'mongodb://localhost:27017/test';
+  //mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -192,7 +194,8 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-app.listen(port, ip);
+//app.listen(port, ip);
+server.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
