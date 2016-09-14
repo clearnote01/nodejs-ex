@@ -39,10 +39,12 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   }
 }
 var db = null,
-    dbDetails = new Object();
+    dbDetails = new Object(),
+    name = null,
+    user_result = null;
 
 var initDb = function(callback) {
-  //mongoURL = 'mongodb://localhost:27017/test';
+  mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -81,31 +83,48 @@ app.get('/', function (req, res) {
   }
 });
 
-//app.post('/login', urlEncodedParser, function(req, res) {
-  ////console.log('page opene!');
-  //let uname = req.body.logname;
-  //let upass = req.body.logpass;
-  //console.log("USER NAME: " + uname);
-  //console.log("PASSWORD: " + upass);
+app.post('/login', urlEncodedParser, function(req, res) {
+  //console.log('page opene!');
+  let uname = req.body.logname;
+  let upass = req.body.logpass;
+  console.log("USER NAME: " + uname);
+  console.log("PASSWORD: " + upass);
 
   //db.collection('profiles').find({'username': uname, 'password': upass})
       //.toArray(function(err, result) {
         //console.log(result);
-        //if (result.length!==0) {
-          //res.redirect('/test');
+        //if (result.length==0) {
+          //res.redirect('/');
         //}
         //else {
-          //res.redirect('/test2');
+          //name = uname;
+          //user_result = result;
+          //res.redirect('/main');
         //}
   //});
-//});
+});
 
 app.post('/signup', urlEncodedParser, function(req, res) {
   let uname = req.body.signname;
   let upass = req.body.signpass;
   
-  var profiles = db.collection('profiles');
-  profiles.insert({'username': uname, 'password': upass });
+  //var profiles = db.collection('profiles');
+  //profiles.insert(
+    //{'username': uname, 'password': upass, 
+      //'question_new': 
+      //{
+        //'weight': [],
+        //'height': [],
+        //'job': null,
+        //'age': null,
+        //'gender': null
+      //}, 
+      //'question_existing':
+      //{
+        //'working_hrs': 0 
+      //} 
+  //});
+
   res.redirect('/test2');
 });
 
@@ -122,6 +141,29 @@ app.get('/test2', function(req, res) {
   col.find().toArray(function(err, result) {
     res.send(JSON.stringify(result));
   });
+});
+
+app.get('/main', function(req,res) {
+  var profiles = db.collection('profiles');
+  //profiles.insert(
+  var uname = 'raju',
+      upass = 'raju';
+  profiles.insert(
+    {'username': uname, 'password': upass, 
+      'question_new': 
+      {
+        'weight': [],
+        'height': [],
+        'job': null,
+        'age': null,
+        'gender': null
+      }, 
+      'question_existing':
+      {
+        'working_hrs': 0 
+      } 
+  });
+  res.render('main.html', { username: name, userresult: JSON.stringify(user_result) });
 });
 
 app.get('/pagecount', function (req, res) {
