@@ -87,31 +87,31 @@ app.get('/', function (req, res) {
   }
 });
 
-//app.post('/login', urlEncodedParser, function(req, res) {
-  ////console.log('page opene!');
-  //if (!db) {
-    //initDb(function(err){});
-  //}
-  //if (db) {
-    //let uname = req.body.logname;
-    //let upass = req.body.logpass;
-    //console.log("USER NAME: " + uname);
-    //console.log("PASSWORD: " + upass);
+app.post('/login', urlEncodedParser, function(req, res) {
+  //console.log('page opene!');
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    let uname = req.body.logname;
+    let upass = req.body.logpass;
+    console.log("USER NAME: " + uname);
+    console.log("PASSWORD: " + upass);
 
-    //db.collection('profiles').find({'username': uname, 'password': upass})
-        //.toArray(function(err, result) {
-          //console.log(result);
-          //if (result.length==0) {
-            //res.redirect('/');
-          //}
-          //else {
-            //name = uname;
-            //user_result = result;
-            //res.redirect('/main');
-          //}
-    //});
-  //}
-//});
+    db.collection('profiles').find({'username': uname, 'password': upass})
+        .toArray(function(err, result) {
+          console.log(result);
+          if (result.length==0) {
+            res.redirect('/');
+          }
+          else {
+            name = uname;
+            user_result = result;
+            res.redirect('/main');
+          }
+    });
+  }
+});
 
 app.post('/signup', urlEncodedParser, function(req, res) {
   if (!db) {
