@@ -123,22 +123,22 @@ app.post('/signup', urlEncodedParser, function(req, res) {
     name = uname;
     console.log(uname+upass);
     
-    //var profiles = db.collection('profiles');
-    //profiles.insert(
-      //{'username': uname, 'password': upass, 
-        //'question_new': 
-        //{
-          //'weight': [],
-          //'height': [],
-          //'job': null,
-          //'age': null,
-          //'gender': null
-        //}, 
-        //'question_existing':
-        //{
-          //'working_hrs': 0 
-        //} 
-    //});
+    var profiles = db.collection('profiles');
+    profiles.insert(
+      {'username': uname, 'password': upass, 
+        'question_new': 
+        {
+          'weight': [],
+          'height': [],
+          'job': null,
+          'age': null,
+          'gender': null
+        }, 
+        'question_existing':
+        {
+          'working_hrs': 0 
+        } 
+    });
 
     res.redirect('/main');
   }
