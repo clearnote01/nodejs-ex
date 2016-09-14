@@ -70,7 +70,7 @@ var initDb = function(callback) {
 };
 
 // Helper functions for dbase !!
-var getUserInfo = function (var db_uname, var db_password) {
+var getUserInfo = function (db_uname,db_password) {
   var profiles = db.collection('profiles');
   profiles.find({'username': db_uname, 'password': db_password }).toArray(function(err, result) {
     if ( result.length == 0 ) {
