@@ -106,8 +106,8 @@ app.post('/login', urlEncodedParser, function(req, res) {
     initDb(function(err){});
   }
   if (db) {
-    let uname = req.body.logname;
-    let upass = req.body.logpass;
+    var uname = req.body.logname;
+    var upass = req.body.logpass;
     console.log("USER NAME: " + uname);
     console.log("PASSWORD: " + upass);
 
