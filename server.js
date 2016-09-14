@@ -93,22 +93,21 @@ app.post('/login', urlEncodedParser, function(req, res) {
     initDb(function(err){});
   }
   if (db) {
-    let uname = req.body.logname;
-    let upass = req.body.logpass;
+    var uname = req.body.logname;
+    var upass = req.body.logpass;
     console.log("USER NAME: " + uname);
     console.log("PASSWORD: " + upass);
 
-    db.collection('profiles').find({'username': uname, 'password': upass})
-        .toArray(function(err, result) {
-          console.log(result);
-          if (result.length==0) {
-            res.redirect('/');
-          }
-          else {
-            name = uname;
-            user_result = result;
-            res.redirect('/main');
-          }
+    db.collection('profiles').find({'username': uname, 'password': upass}).toArray(function(err, result) {
+      name = err;
+      if (result.length==0) {
+        res.redirect('/main');
+      }
+      else {
+        name = uname;
+        user_result = result;
+        res.redirect('/main');
+      }
     });
   }
 });
