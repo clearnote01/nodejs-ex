@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Welcome to OpenShift</title>
+  <link rel="stylesheet" href="images/.jpg">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+
+
+<style>
+
+/*!
+ * Bootstrap v3.0.0
+ *
+ * Copyright 2013 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+body {
+  color: #404040;
+  font-family: "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+ul {
+    margin-top: 0;
+}
+
+</style>
+</head>
+<body>
+       <div>
+         Login info !!
+        <form action="/login" method="post">
+          Username: <input type="text" name="logname" placeholder="User name">
+          Password: <input type="password" name="logpass" placeholder="Password">
+          <button type="submit">Submit</button>
+        </form>
+        Signup!!
+        <form action="/signup" method="post">
+          Username: <input type="text" name="signname" placeholder="User name">
+          Password: <input type="password" name="signpass" placeholder="Password">
+          <button type="submit">Submit</button>
+        </form>
+        
+       </div>
+
+<section class='container'>
+          <hgroup>
+            <h1>UTkar Utaksr Utkarsh Utkarsh Utkarh OpenShift</h1>
+          </hgroup>
+
+
+        <div class="row">
+          <section class='col-xs-12 col-sm-6 col-md-6'>
+            <section>
+              <h2>How to use this example application</h2>
+                <p>Page view count:
+                <% if (pageCountMessage) { %>
+                   <span class="code" id="count-value"><%=pageCountMessage%></span>
+                   </p>
+                    <div class="code"><h3>DB Connection Info:</h3>
+                      <table style='margin-left: 20px'>
+                          <tr><td>Type:</td><td><%= dbInfo.type %></td></tr>
+                          <tr><td>URL:</td><td><%= dbInfo.url %></td></tr>
+                      </table>
+                    </div>
+                <% } else { %>
+                   <span class="code" id="count-value">No database configured</span>
+                   </p>
+                <%} %>
+          </section>
+        </div>
+
+        <footer>
+          <div class="logo"><a href="https://www.openshift.com/"></a></div>
+        </footer>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,159 @@
+ul.navbar-top .reveal {
+	display: none;
+}
+ul.navbar-top .collapse {
+	display: inline;
+}
+
+ul.navbar-top a {
+	text-decoration: none;
+}
+ul.navbar-top {
+	position: relative;
+	z-index: 99999;
+	width: 100%;
+	text-align: left;
+	font-size: 0;
+	line-height: 0;
+	font-family: "futura-pt";
+	padding: 0;
+}
+ul.navbar-top b, ul.navbar-top strong, ul.navbar-top b *, ul.navbar-top strong * {
+	font-weight: 700;
+}
+ul.navbar-top:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+ul.navbar-top li, ul.navbar-top a {
+	display: inline-block;
+}
+
+ul.navbar-top li {
+	float: right;
+}
+
+ul.navbar-top li#nav-company {
+	float: left;
+}
+ul.navbar-top li#nav-company a {
+	font-size: 18px;
+	line-height: 14px;
+}
+
+ul.navbar-top, ul.navbar-top a {
+	background-color: #000;
+}
+
+.firewatch ul.navbar-top, .firewatch ul.navbar-top a {
+	background-color: #2d112b;
+}
+.firewatch.launch ul.navbar-top, .firewatch.launch ul.navbar-top a {
+	background-color: #210002;
+}
+
+.firewatch.faq ul.navbar-top, .firewatch.faq ul.navbar-top a {
+	background-color: #FF6C3F;
+}
+
+ul.navbar-top a {
+	color: #F3F1E9;
+	font-size: 14px;
+	line-height: 14px;
+	padding: 10px;
+	text-transform: uppercase;
+}
+.index ul.navbar-top a {
+	color: #F3F1E9;
+}
+.firewatch ul.navbar-top a {
+	color: #ffaf00;
+}
+.firewatch.faq ul.navbar-top a {
+	color: #2D112D;
+}
+
+ul.navbar-top li.current a, ul.navbar-top li.current a:hover {
+	background-color: #F3F1E9;
+	color: #000;
+}
+.index ul.navbar-top li.current a, .index ul.navbar-top li.current a:hover {
+	background-color: #000;
+	color: #F3F1E9;
+}
+
+.firewatch ul.navbar-top li.current a, .firewatch ul.navbar-top li.current a:hover {
+	background-color: #7e0030;
+	color: #ff6d3f;
+}
+.firewatch.launch ul.navbar-top li.current a, .firewatch.launch ul.navbar-top li.current a:hover {
+	background-color: #a34300;
+	color: #ffaf00;
+}
+
+.firewatch.faq ul.navbar-top li.current a, .firewatch.faq ul.navbar-top li.current a:hover {
+	background-color: #2D112D;
+	color: #C9293E;
+}
+
+.firewatch ul.navbar-top {
+	position: absolute;
+	top: 0;
+}
+
+.firewatch.faq ul.navbar-top {
+	margin-bottom: 0;
+}
+
+ul.navbar-top a:hover {
+	background-color: #44433E;
+	text-decoration: none;
+	border: 0;
+}
+
+.firewatch ul.navbar-top a:hover {
+	background-color: #530031;
+}
+.firewatch.launch ul.navbar-top a:hover {
+	background-color: #5a1715;
+}
+
+.firewatch.faq ul.navbar-top a:hover {
+	background-color: #C8512C;
+}
+
+@media only screen and (max-width: 770px) {
+	ul.navbar-top .reveal {
+		display: inline;
+	}
+	ul.navbar-top .collapse {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	body {
+		padding-bottom: 200px !important;
+	}
+	
+	ul.navbar-top li, ul.navbar-top li#nav-company {
+		float: none;
+		display: block;
+		text-align: center;
+	}
+	ul.navbar-top a {
+		float: none;
+		display: block;
+	}
+	ul.navbar-top {
+		position: absolute;
+		bottom: 0;
+		counter-reset: c 6;
+	}
+
+	.firewatch ul.navbar-top {
+		top: initial;
+	}
+}

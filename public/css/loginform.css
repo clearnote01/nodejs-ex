@@ -1,0 +1,37 @@
+.loginform {
+    font-size: 1.3em;
+    padding: 30px;
+    font-color: #FFAF00;
+}
+
+.loginform > input {
+    margin-left: 40px;
+    font: lighter;
+    padding: 3px;
+    border-radius: 5%;
+    background-color: #973700;
+    border-color: #973700;
+    color: #FFAF00;
+	box-shadow: 0px 1px 1px #ffaf00;
+}
+
+.loginform > button {
+    /*background-color: #FFAF00;*/
+    background-color: #210002;
+	/*box-shadow: 0px 1px 1px #ffaf00;*/
+    padding: 0px;
+    border-width: 0px;
+    font-weight: 700;
+	letter-spacing: 4px;
+    font-size: 0.6em;
+    color: #973700;
+}
+
+
+span.highlight {
+    color: #FF9F00;
+}
+
+.loginform > button:hover {
+    color: #FF9F00;
+}

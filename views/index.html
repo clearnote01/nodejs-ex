@@ -1,65 +1,131 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Welcome to OpenShift</title>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://www.firewatchgame.com/ -->
+<html class="">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>FitMeUp! - Hackathon Submission</title>
+    <link rel="stylesheet" href="/static/css/firewatchlaunch.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/static/css/camponav.css" type="text/css" media="screen" charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/static/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/loginform.css">
+	</head>
+	<body class="firewatch launch withxbone">
+				<ul class="navbar-top">
+      <li id="nav-company"><a href=""><strong>FitMeUp!</strong></a></li>
+			<!-- THESE MUST GO IN REVERSE ORDER BECAUSE CSS IS DUMB SOMETIMES -->
+			<li id="nav-review"><a ><strong><span id="loginlink2" class="collapse">Log  in</span>
+            <span class="reveal">Login</span>
+          </strong></a></li>
+			<li id="nav-review"><a ><strong><span id="loginlink" class="collapse">Sign Up</span>
+            <span class="reveal">Sign Up</span>
+          </strong></a></li>
+			<li id="nav-review"><a href=""><strong><span class="collapse">About Us</span>
+            <span class="reveal">About Us</span>
+          </strong></a></li>
+			<!--<li id="nav-store"><a href=""><strong><span class="collapse">About </span>Us</strong></a></li>-->
+			<!--<li id="nav-blog"><a href=""><strong><span class="collapse">Development </span>Blog</strong></a></li>-->
+			<li id="nav-game" class=" current"><a href=""><span class="collapse">Begin: </span><strong>Play!</strong></a></li>
+		</ul>		<script type="text/javascript">document.getElementById("nav-game").className += " current";</script>
+    <div style="min-height: 150px"></div>
 
-
-<style>
-
-/*!
- * Bootstrap v3.0.0
- *
- * Copyright 2013 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world @twitter by @mdo and @fat.
- */
-
-body {
-  color: #404040;
-  font-family: "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-ul {
-    margin-top: 0;
-}
-
-</style>
-</head>
-<body>
-       <div>
-         Login info !!
-        <form action="/login" method="post">
-          Username: <input type="text" name="logname" placeholder="User name">
-          Password: <input type="password" name="logpass" placeholder="Password">
-          <button type="submit">Submit</button>
-        </form>
-        Signup!!
-        <form action="/signup" method="post">
-          Username: <input type="text" name="signname" placeholder="User name">
-          Password: <input type="password" name="signpass" placeholder="Password">
-          <button type="submit">Submit</button>
-        </form>
-        
-       </div>
-
-<section class='container'>
-          <hgroup>
-            <h1>UTkar Utaksr Utkarsh Utkarsh Utkarh OpenShift</h1>
-          </hgroup>
-
-
+		<div id="page">
+			<div id="maincontain"><div id="main">
+				<div class="section pressquote big first">
+					<h3>"Begin your journey for a fitter self."</h3>
+          <h3>"Follow a lifestyle schedule personalized for you."</h3>
+					<h3>"Track your progress. Track others progress!"</h3>
+				</div>
+        <div style="min-height: 150px"></div>
+				<div id="loginlocation" class="section pressquote big first">
+					<h2 class="banner"><span><em>Begin your adventure now!</em></span></h2>
+          <h3><span id="loginbutton" class="highlight" href="">Login</span> or 
+            <span id="signupbutton">Signup</span> to begin</h3>
+          <br><br>
+          <form id="login" class="loginform" action="/login">
+            Username: <input type="text" name="logname" placeholder="" required>
+            <br><br>
+            Password: <input type="Password" name="logpass" placeholder="" required>
+            <br><br>
+            <button type="submit">Submit</button>
+          </form>
+          <form id="signup" class="loginform" action="/signup">
+            Select a name: <input type="text" name="signame" placeholder="" required>
+            <br><br>
+            Select a password: <input type="password" name="sigpass" placeholder="" required>
+            <br><br>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+          <br><br>
+        <div class="section pressquote big first">
+          <h2>"What does FitmeUp do!"</h2>
+        </div>
+				<div class="section description">
+					<h6>Track progress</h6>
+					<div class="columntext">
+						<p class="left">The year is 1989.
+						<br><br>
+						You are a man named Henry who has retreated from your messy life to work as a fire lookout in the Wyoming wilderness. Perched atop a mountain, it's your job to find smoke and keep the wilderness safe.
+						<br><br>
+						An especially hot, dry summer has everyone on edge. Your supervisor, a woman named Delilah, is available to you </p><p>at all times over a small, handheld radio—and is your only contact with the world you've left behind.
+						<br><br>
+						But when something strange draws you out of your lookout tower and into the world below, you'll explore a wild and unknown environment, facing questions and making interpersonal choices that can build or destroy the only meaningful relationship you have.
+						</p>
+					</div>
+					<h6>Machine Learning!</h6>
+					<div class="">
+						<p class="left">The year is 1989.
+						<br><br>
+						You are a man named Henry who has retreated from your messy life to work as a fire lookout in the Wyoming wilderness. Perched atop a mountain, it's your job to find smoke and keep the wilderness safe.
+						</p>
+					</div>
+				</div>
+				<div class="section internallinks">
+          <ul class="links smalllinks dim">
+            <li class="link merchandise"><a href="">
+              <h3>Campo Santo Store</h3>
+              <h4 class="banner"><span>Merchandise</span></h4>
+            </a></li>
+          </ul>
+					<ul class="links smalllinks dim">
+						<li class="link media"><a href="">
+							<h4 class="banner"><span>Screens &amp; Trailers</span></h4>
+						</a></li>
+						<li class="link faq"><a href="">
+							<h4 class="banner"><span>Firewatch FAQ</span></h4>
+						</a></li>
+					</ul>
+				</div>
+				<div class="section pressquote big">
+					<h2>"As visually striking <br>as its unique premise."</h2>
+					<h3>Entertainment Weekly</h3>
+				</div>
+				<div class="section support">
+					<ul class="supportlinks smalllinks dim">
+						<li class="link techsupport"><a href="">
+							<h4 class="banner"><span>Tech Support</span></h4>
+						</a></li>
+						<li class="link streaming"><a href="">
+							<h4 class="banner"><span>Streaming &amp; Let's Plays</span></h4>
+						</a></li>
+					</ul>
+				</div>
+				<div class="section copyright">
+					<p>©<span id="year">2016</span> Campo Santo, in cooperation with Panic.</p>
+					<p>Firewatch is a trademark of Campo Santo.</p>
+				</div>
+				<div class="section companylinks">
+					<ul class="companies">
+						<li class="campo"><a href="">
+							<h1>Campo Santo</h1>
+						</a></li>
+						<li class="panic"><a href="">
+							<h1>Panic</h1>
+						</a></li>
+					</ul>
+				</div>
+			</div></div>
+		</div>
         <div class="row">
           <section class='col-xs-12 col-sm-6 col-md-6'>
             <section>
@@ -80,11 +146,13 @@ ul {
                 <%} %>
           </section>
         </div>
-
-        <footer>
-          <div class="logo"><a href="https://www.openshift.com/"></a></div>
-        </footer>
-
-</section>
-</body>
-</html>
+		<script type="text/javascript" src="/static/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="/static/js/jquery-migrate-1.2.1.min.js"></script>
+		<!--<script type="text/javascript" src="./camp_files/magnific.js"></script>-->
+		<script type="text/javascript" src="/static/js/firewizard.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#year").text((new Date).getFullYear());
+		});
+		</script>
+</body><div></div></html>
