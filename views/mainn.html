@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://www.firewatchgame.com/ -->
+<html class="">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>FitMeUp! - Hackathon Submission</title>
+    <link rel="stylesheet" href="/static/css/firewatchlaunch.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/static/css/camponav.css" type="text/css" media="screen" charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/static/css/fonts.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/game_page.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/loginform.css">
+	</head>
+	<body class="firewatch launch withxbone">
+				<ul class="navbar-top">
+      <li id="nav-company"><a href=""><strong>FitMeUp!</strong></a></li>
+			<!-- THESE MUST GO IN REVERSE ORDER BECAUSE CSS IS DUMB SOMETIMES -->
+			<li id="nav-review"><a ><strong><span id="loginlink2" class="collapse">Log  in</span>
+            <span class="reveal">Login</span>
+          </strong></a></li>
+			<li id="nav-review"><a ><strong><span id="loginlink" class="collapse">Sign Up</span>
+            <span class="reveal">Sign Up</span>
+          </strong></a></li>
+			<li id="nav-review"><a href=""><strong><span class="collapse">About Us</span>
+            <span class="reveal">About Us</span>
+          </strong></a></li>
+			<!--<li id="nav-store"><a href=""><strong><span class="collapse">About </span>Us</strong></a></li>-->
+			<!--<li id="nav-blog"><a href=""><strong><span class="collapse">Development </span>Blog</strong></a></li>-->
+			<li id="nav-game" class=" current"><a href=""><span class="collapse">Begin: </span><strong>Play!</strong></a></li>
+		</ul>		<script type="text/javascript">document.getElementById("nav-game").className += " current";</script>
+    <div style="min-height: 50px"></div>
+
+
+
+    <div class="flex">
+      <div style="" id="child-left">
+        <div id="finish-line"><h4>Finish line: 40days</h4></div>
+        <div id="flex-conta">
+          <div id="cur-date">23th day</div>
+          <div id="image-here">image here</div>
+          <div id="arrow-here">UP<br><br>DOWN</div>
+        </div>
+        <div id="stats">
+          <div class="stat">stat 1</div>
+          <div class="stat">stat 2</div>
+          <div class="stat">stat 3</div>
+          <div class="stat">stat 4</div>
+          <div class="stat">stat 5</div>
+        </div>
+      </div>
+      <div style="" id="child-right">
+        <div id="chat-box">
+          This is the chat box
+          <div id="msg-box">
+            <div id="bot-msg" class="msg msg-bot">This is a message</div>
+            <div class="msg msg-bot">this is a message</div>
+            <div class="msg msg-usr">This is a message</div>
+            <div class="msg msg-bot">this is a message</div>
+            <div class="msg msg-usr">This is a message</div>
+            <div class="msg msg-bot">this is a message</div>
+            <div class="msg msg-usr">This is a message</div>
+            <div id="usr-msg" class="msg msg-usr">This is a message</div>
+          </div>
+          <div id="txt-box">
+            <form action="" id="txt-form">
+              <input autocomplete="off" id="txt-msg" placeholder="Enter response here" type="text">
+              <button>Submit</button>
+              <!--<button>Send</button>-->
+            </form> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div style="font-size:1.3em; color:black">
+        Hello <span id="username"><%=username%></span>
+    </div>
+		<script type="text/javascript" src="/static/js/socket.io.js"></script>
+		<script type="text/javascript" src="/static/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="/static/js/jquery-migrate-1.2.1.min.js"></script>
+		<!--<script type="text/javascript" src="./camp_files/magnific.js"></script>-->
+		<script type="text/javascript" src="/static/js/firewizard.js"></script>
+		<script type="text/javascript" src="/static/js/chat-client.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#year").text((new Date).getFullYear());
+		});
+		</script>
+</body><div></div></html>

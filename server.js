@@ -50,7 +50,7 @@ var db = null,
     upass = null;
 
 var initDb = function(callback) {
-  mongoURL = 'mongodb://localhost:27017/test';
+  //mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -192,7 +192,20 @@ app.get('/test2', function(req, res) {
 
 app.get('/main', function(req,res) {
   console.log(JSON.stringify(user_result));
-  res.render('main.html', { username: user_result.username, userresult: JSON.stringify(user_result) });
+  res.render('mainn.html', { username: user_result.username, userresult: JSON.stringify(user_result) });
+  todays_qs = user_result.question_new;
+  //user_result = null;
+  io.on('connection', function(socket) {
+    console.log('A user has connected '+socket.id);
+    socket.emit('respsresp','das est testa');
+    socket.on('response', function(msg) {
+      console.log(msg);
+      socket.emit('respsresp', JSON.stringify(bot_msg));
+    });
+    socket.on('disconnect', function() {
+      console.log('Disconnect by client '+socket.id); 
+    });
+  });
 });
 
 app.get('/pagecount', function (req, res) {
@@ -226,42 +239,11 @@ var users = [];
 var msgs = [];
 var msgs_length = 0;
 var user_by_id = {};
+var bot_msg = {
+  name: 'bot',
+  msg: 'message received'
+}
 
-io.on('connection', function(socket) {
-  console.log('A user has connected '+socket.id);
-  for(let i=0; i<users.length; i++) {
-    console.log(users);
-    socket.emit('new-user', users[i]);
-  }
-  for(let j=0; j<msgs.length; j++) {
-    socket.emit('got-a-text', msgs[j]);
-  };
-  socket.on('disconnect', function() {
-    console.log('Disconnect by client '+socket.id); 
-    let disc_user = user_by_id[socket.id];
-    if (disc_user !== undefined) {
-      io.emit('a-user-disc', disc_user);
-      console.log('DISC user '+disc_user);
-      users.splice(users.indexOf(disc_user),1);
-    }
-  });
-  socket.on('got-a-text', function(msg) {
-    console.log('Messgae: ' + msg);
-    msgs.push(msg);
-    msgs_length += 1;
-    if (msgs_length > 200) {
-      msgs.shift();
-      msgs_length -= 1;
-    }
-    io.emit('got-a-text', msg);
-  });
-  socket.on('new-user', function(msg) {
-    console.log('New Nick: ' + msg);
-    io.emit('new-user', msg);
-    user_by_id[socket.id] = msg;
-    users.push(msg);
-  });
-});
 //app.listen(port, ip);
 server.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);

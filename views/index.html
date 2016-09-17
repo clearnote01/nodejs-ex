@@ -41,17 +41,17 @@
           <h3><span id="loginbutton" class="highlight" href="">Login</span> or 
             <span id="signupbutton">Signup</span> to begin</h3>
           <br><br>
-          <form id="login" class="loginform" action="/login">
-            Username: <input type="text" name="logname" placeholder="" required>
+          <form id="login" class="loginform" action="/login" method="post">
+            Username: <input autocomplete="off" type="text" name="logname" placeholder="" required>
             <br><br>
-            Password: <input type="Password" name="logpass" placeholder="" required>
+            Password: <input autocomplete="off" type="Password" name="logpass" placeholder="" required>
             <br><br>
             <button type="submit">Submit</button>
           </form>
-          <form id="signup" class="loginform" action="/signup">
-            Select a name: <input type="text" name="signame" placeholder="" required>
+          <form id="signup" class="loginform" method="post" action="/signup">
+            Select a name: <input autocomplete="off" type="text" name="signname" placeholder="" required>
             <br><br>
-            Select a password: <input type="password" name="sigpass" placeholder="" required>
+            Select a password: <input autocomplete="off" type="password" name="signpass" placeholder="" required>
             <br><br>
             <button type="submit">Submit</button>
           </form>
