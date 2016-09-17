@@ -1,5 +1,5 @@
 //  OpenShift sample Node application
-let express = require('express'),
+var express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
@@ -198,6 +198,9 @@ app.get('/main', function(req,res) {
   io.on('connection', function(socket) {
     console.log('A user has connected '+socket.id);
     socket.emit('respsresp','das est testa');
+    for (prop in user_result.question_new) {
+      socket.emit('respsresp', prop);
+    }
     socket.on('response', function(msg) {
       console.log(msg);
       socket.emit('respsresp', JSON.stringify(bot_msg));
