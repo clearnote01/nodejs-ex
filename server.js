@@ -14,7 +14,7 @@ var jsonParser = bodyparser.json()
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'));
+//app.use(morgan('combined'));
 app.use('/static', express.static(__dirname+'/public'));
 //app.use(express.bodyParser());
 
@@ -50,7 +50,7 @@ var db = null,
     upass = null;
 
 var initDb = function(callback) {
-  //mongoURL = 'mongodb://localhost:27017/test';
+  mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -75,8 +75,8 @@ var initDb = function(callback) {
 var getUserInfo = function (db_uname,db_password, res, loginsuccesscallback, loginfailcallback, failmessage) {
   var profiles = db.collection('profiles');
   profiles.find({'username': db_uname, 'password': db_password }).toArray(function(err, result) {
-    console.log('RESULT BELOW');
-    console.log(result)
+    //console.log('RESULT BELOW');
+    //console.log(result)
     if ( result.length == 0 ) {
       loginfailcallback(res,failmessage);
     }
@@ -93,8 +93,8 @@ var loginfailcallback = function(res, failmessage) {
 }
 
 var userlogincallback = function(res,user_result) {
-  console.log('USER RESULT');
-  console.log(user_result);
+  //console.log('USER RESULT');
+  //console.log(user_result);
   res.redirect('/main');
 }
 
@@ -147,35 +147,149 @@ app.post('/signup', urlEncodedParser, function(req, res) {
     console.log(uname+upass);
     var profiles = db.collection('profiles');
     var loginfaildosignup = function(res, failmessage) {
-      profiles.insert({
-          'username': uname, 'password': upass, 
-          'question_new': 
-            {
-              'weight': null,
-              'height': null,
-              'when_it_all_started': Date.now(),
-              'job': null,
-              'age': null,
-              'gender': null,
-            }, 
-          'question_existing':
-            {
-              'working_hrs': 0 
-            } 
-      });
-      res.end(failmessage);
-    }
-    var failloginmessage = 'Happy sign-in new user!!';
-    getUserInfo(uname, upass, res, userlogincallback, loginfaildosignup, failloginmessage);
+    profiles.insert({
+      'username': uname, 'password': upass, 
+      'question_new': [
+        { 
+          'name': 'weight',
+          'val': null,
+          'text': 'What is your weight'
+        },
+        { 
+          'name': 'height',
+          'val': null,
+          'text': 'What is your height'
+        },
+        { 
+          'name': 'wife',
+          'val': null,
+          'text': 'What is your wife'
+        },
+        { 
+          'name': 'job',
+          'val': null,
+          'text': 'What is your job'
+        },
+        { 
+          'name': 'gender',
+          'val': null,
+          'text': 'what is your gender (m/f)'
+        },
+        { 
+          'name': 'age',
+          'val': null,
+          'text': 'what is your age (m/f)'
+        }
+      ],
+      'question_existing': [
+        { 
+          'name': 'happiness',
+          'val': null,
+          'text': 'What is your happiness'
+        },
+        { 
+          'name': 'workhrs',
+          'val': null,
+          'text': 'What is your working hrs'
+        },
+        { 
+          'name': 'sadness',
+          'val': null,
+          'text': 'What is your sadness'
+        },
+        { 
+          'name': 'funhrs',
+          'val': null,
+          'text': 'What is your funhrs'
+        }
+      ],
+      'when_it_all_started': Date.now(),
+      'answer_new': [
+        { 
+          'name': 'weight',
+          'val': null,
+          'text': 'What is your weight'
+        },
+        { 
+          'name': 'height',
+          'val': null,
+          'text': 'What is your height'
+        },
+        { 
+          'name': 'wife',
+          'val': null,
+          'text': 'What is your wife'
+        },
+        { 
+          'name': 'job',
+          'val': null,
+          'text': 'What is your job'
+        },
+        { 
+          'name': 'gender',
+          'val': null,
+          'text': 'what is your gender (m/f)'
+        },
+        { 
+          'name': 'age',
+          'val': null,
+          'text': 'what is your age (m/f)'
+        }
+      ],
+      'answer_existing': [
+        { 
+          'name': 'happiness',
+          'val': null,
+          'text': 'What is your happiness'
+        },
+        { 
+          'name': 'workhrs',
+          'val': null,
+          'text': 'What is your working hrs'
+        },
+        { 
+          'name': 'sadness',
+          'val': null,
+          'text': 'What is your sadness'
+        },
+        { 
+          'name': 'funhrs',
+          'val': null,
+          'text': 'What is your funhrs'
+        }
+      ],
+      'answer_existing_cum': [
+        { 
+          'name': 'happiness',
+          'val': null,
+          'text': 'What is your happiness'
+        },
+        { 
+          'name': 'workhrs',
+          'val': null,
+          'text': 'What is your working hrs'
+        },
+        { 
+          'name': 'sadness',
+          'val': null,
+          'text': 'What is your sadness'
+        },
+        { 
+          'name': 'funhrs',
+          'val': null,
+          'text': 'What is your funhrs'
+        }
+      ],
+      'nth-day': 0,
+      'the-day': 1000,
+      'ques_index': 0,
+      'ques_exist_index': 0
+    });
+    res.end(failmessage);
   }
-});
-
-app.get('/dbase', function(req, res) {
-  console.log(db);
-});
-
-app.get('/test', function(req, res) {
-  res.send('Oh the world!!');
+  var failloginmessage = 'Happy sign-in new user!!';
+  getUserInfo(uname, upass, res, userlogincallback, loginfaildosignup, failloginmessage);
+  }
 });
 
 app.get('/test2', function(req, res) {
@@ -191,24 +305,14 @@ app.get('/test2', function(req, res) {
 });
 
 app.get('/main', function(req,res) {
-  console.log(JSON.stringify(user_result));
-  res.render('mainn.html', { username: user_result.username, userresult: JSON.stringify(user_result) });
-  todays_qs = user_result.question_new;
+  if (user_result) {
+    console.log(JSON.stringify(user_result));
+    res.render('mainn.html', { username: user_result.username, userresult: JSON.stringify(user_result) });
+  }
+  else {
+    res.redirect('/');
+  }
   //user_result = null;
-  io.on('connection', function(socket) {
-    console.log('A user has connected '+socket.id);
-    socket.emit('respsresp','das est testa');
-    for (prop in user_result.question_new) {
-      socket.emit('respsresp', prop);
-    }
-    socket.on('response', function(msg) {
-      console.log(msg);
-      socket.emit('respsresp', JSON.stringify(bot_msg));
-    });
-    socket.on('disconnect', function() {
-      console.log('Disconnect by client '+socket.id); 
-    });
-  });
 });
 
 app.get('/pagecount', function (req, res) {
@@ -247,6 +351,81 @@ var bot_msg = {
   msg: 'message received'
 }
 
+var increment_ques_index = function(username, new_index, callback) {
+  db.collection('profiles').updateOne(
+      {'username': username},
+      {$set: { 'ques_index': new_index } },
+      callback
+  );
+}
+
+var maintain_database = function() {
+  console.log('all regular database work go here!');
+}
+
+io.on('connection', function(socket) {
+  console.log('A user has connected '+socket.id);
+  if (user_result) {
+    var question_new_len = user_result.question_new.length;
+    var i_counter = user_result.ques_index;
+    var repeat_counter = user_result.ques_exist_index;
+    var question_exist_len = user_result.question_existing.length;
+    console.log(question_new_len);
+    console.log(user_result.question_existing);
+    // This is the initial setup. For new signup users
+    if (i_counter < question_new_len) {
+        console.log('question sent: '+user_result.question_new[i_counter].name); 
+      console.log(user_result.question_new);
+      socket.emit('new_ques', user_result.question_new[i_counter].text);
+    }
+    else {
+      if (repeat_counter < question_exist_len) {
+        socket
+          .emit('new_ques', user_result.question_existing[repeat_counter]
+          .text);
+      }
+    }
+    socket.on('ques-ans', function(msg) {
+      if (i_counter < question_new_len ) {
+        i_counter += 1;
+        console.log('Counter' + i_counter);
+        increment_ques_index(user_result.username, i_counter,function() {
+          //console.log('Updated counter');
+          //console.log('Update mongo with msg!'+msg);
+          console.log('Answer received: '+user_result.question_new[i_counter-1].name);
+          if ( i_counter < question_new_len) {
+            console
+              .log('question sent: '+user_result
+              .question_new[i_counter]
+              .name); 
+            socket
+              .emit('new_ques', user_result.question_new[i_counter]
+              .text);
+          }
+          else {
+            socket
+              .emit('new_ques', user_result.question_existing[repeat_counter]
+              .text);
+          }
+        });
+      }
+      else {
+        //This the next level of setup! For existing users!
+        if (repeat_counter < question_exist_len) {
+          repeat_counter += 1;
+          increment_ques_index(user_result.username, repeat_counter,function() {
+            if (repeat_counter < question_exist_len) {
+              socket.emit('new_ques', user_result.question_existing[repeat_counter].text);
+            }
+          });
+        }
+      }
+    });
+  }
+  socket.on('disconnect', function() {
+    console.log('Disconnect by client '+socket.id); 
+  });
+});
 //app.listen(port, ip);
 server.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);

@@ -3,6 +3,13 @@ $(document).ready(function() {
   var heading = $('#main')
   var msgs = 0
   var username = $('#username').text();
+  //$('#nick-form').submit(function() {
+    //$('#nick-form').hide();
+    //socket.emit('new-user', my_nick);
+    //$('#helloMsg').show();
+    //$('#helloNick').text(my_nick);
+    //return false;
+  //});
   function botnewmsg(msg) {
     msgs = msgs + 1;
     var box = $('#bot-msg').clone();
@@ -37,27 +44,17 @@ $(document).ready(function() {
     ownnewmsg(msg);
     msg = {
       name: username,
-      msg: msg
+      msg: msg,
     }
     msg = JSON.stringify(msg);
     console.log('MESSAGE HERE '+msg);
-    socket.emit('ques-ans', msg);
+    socket.emit('response', msg);
     $('#txt-msg').val('');
     return false;
   });
-  socket.on('new_ques', function(msg) {
+  socket.on('respsresp', function(msg) {
     botnewmsg(msg);
   });
-  //$('#nick-form').submit(function() {
-    //$('#nick-form').hide();
-    //socket.emit('new-user', my_nick);
-    //$('#helloMsg').show();
-    //$('#helloNick').text(my_nick);
-    //return false;
-  //});
-  //socket.on('respsresp', function(msg) {
-    //botnewmsg(msg);
-  //});
   //socket.on('new-user', function(msg) {
      //let mem_block = $('#a_mem').clone();
      //console.log('Message ' + msg);
