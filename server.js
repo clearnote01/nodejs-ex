@@ -1,5 +1,5 @@
 //  OpenShift sample Node application
-var express = require('express'),
+let express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
