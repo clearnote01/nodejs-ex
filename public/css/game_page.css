@@ -18,6 +18,11 @@ body {
 
 h1, h2, h3, h4 {
 	text-transform: uppercase;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 1.3em;
 }
 
 /* BANNER STYLING */
@@ -44,7 +49,8 @@ h1, h2, h3, h4 {
     min-height: 100%;
     display: flex;
     flex-flow: row nowrap;
-    background-color: #973700;
+    /*background-color: #973700;*/
+    background-color: #F6F6F6;
     /*padding: 5px;*/
     margin: 50px;
     border-radius: 2%;
@@ -58,17 +64,19 @@ div.flex > div {
 }
 
 #child-left {
-    background-color: #973700;
+    /*background-color: #973700;*/
     box-shadow: 00px 00px 18px #000;
     border-radius: 2%;
     flex: 1 1 83%;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
+    background-color: white;
 }
 
 #child-left > #finish-line {
     align-self: center;
+    color: #210002;
 }
 
 #child-left > #stats {
@@ -83,31 +91,60 @@ div.flex > div {
 #child-left > #flex-conta {
     flex: 1 1 80%;
     min-height: 500px;
-    background-color: pink;
+    /*[>background-color: pink;<]*/
     display: flex;
     flex-flow: nowrap;
+    background: url('/static/images/game-bg-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #child-left > #flex-conta > #cur-date {
     align-self: center;
     flex: 1 1 5%;
-    background-color: red;
+    /*background-color: red;*/
     order: 1;
+    text-shadow: 4px 4px  9px #213002;
+    font-weight: 900;
+    color: #210002
+
 }
 
 #child-left > #flex-conta > #image-here {
     align-self: center;
     order: 2;
     flex: 1 1 90%;
-    background-color: green;
+    min-height: 120px;
+    min-width: 120px;
+    font-weight: 600;
+    font-size:1.3em;
+    color: #210002;
+    text-shadow: 1px 1px 8px #210007;
+    /*background-image: url('/static/images/happychar.png');*/
+    /*background-size: 100% 100%;*/
+    /*background-color: green;*/
+    /*box-shadow: 10px 10px 5px #fff;*/
+    /*background-size: 100% auto;*/
+    /*background-repeat: no-repeat;*/
 }
 
+#image-here > img {
+    width: 100%:
+    height: 100%:
+}
 
 #child-left > #flex-conta > #arrow-here {
     align-self: center;
     order: 3;
     flex: 1 1 5%;
-    background-color: yellow;
+    /*background-color: yellow;*/
+    cursor: pointer;
+}
+
+#arrow-here > i {
+    text-shadow: 4px 4px  9px #213002;
+    font-weight: 900;
+    color: #210002
 }
 
 #stats > .stat {
@@ -117,7 +154,7 @@ div.flex > div {
     min-width: 80px;
     max-height: 80px;
     max-width: 80px;
-    background-color: pink;
+    background-color: #F6F6F6;
 }
 
 #child-right {
@@ -125,17 +162,18 @@ div.flex > div {
     flex: 1 1 10%;
     display: flex;
     align-items: center;
+    /*background-color: gray;*/
 }
 
 #child-right > #chat-box {
     flex: 1 1 100%;
-    background-color: tan;
+    background-color: #F6F6F6;
     /*display: flex;*/
     /*flex-direction: column nowrap;*/
 }
 
 #chat-box > #msg-box {
-    max-height: 550px;
+    max-height: 450px;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -184,10 +222,17 @@ div.flex > div {
     div.flex > div {
         min-height: 700px;
     }
+    #chat-box > #msg-box {
+        max-height: 500px;
+    }
+    
 }
 @media only screen and (min-width: 1800px) {
     div.flex > div {
         min-height: 900px;
+    }
+    #chat-box > #msg-box {
+        max-height: 700px;
     }
 }
 /*div.main-container > div { */
