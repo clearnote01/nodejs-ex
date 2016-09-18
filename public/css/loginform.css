@@ -1,3 +1,6 @@
+#loginbutton,#signupbutton {
+    cursor: pointer;
+}
 .loginform {
     font-size: 1.3em;
     padding: 30px;

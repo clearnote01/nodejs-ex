@@ -33,10 +33,10 @@
 
     <div class="flex">
       <div style="" id="child-left">
-        <div id="finish-line"><h4>Finish line: 40days</h4></div>
+        <div id="finish-line"><h4 class="banner"><span>Finish line: 40days</span></h4></div>
         <div id="flex-conta">
           <div id="cur-date">23th day</div>
-          <div id="image-here">image here</div>
+          <div id="image-here"></div>
           <div id="arrow-here">UP<br><br>DOWN</div>
         </div>
         <div id="stats">
@@ -89,4 +89,8 @@
 			$("#year").text((new Date).getFullYear());
 		});
 		</script>
+            <script type="text/javascript" src="/static/js/html5-canvas-game-character-1.js"></script>
+            <script type="text/javascript">
+                prepareCanvas(document.getElementById("image-here"), $('#image-here').width, $('#image-here').height);
+            </script>
 </body><div></div></html>

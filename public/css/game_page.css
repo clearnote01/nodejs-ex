@@ -5,8 +5,37 @@
 }
 
 body {
-    background-color: tan;
+    /*background-color: #210002;*/
+    /*background-color: #973700;*/
+    background-color: #A34300;
+	color: #ffaf00;
+	font-family: 'Verlag A', 'Verlag B', "Verlag";
+	font-weight: 300;
+	font-style: normal;
+	text-align: center;
+	font-size: 20px;
+}
 
+h1, h2, h3, h4 {
+	text-transform: uppercase;
+}
+
+/* BANNER STYLING */
+
+.banner span {
+    background: url('/static/images/banner_transparent_left.png') no-repeat left top / contain, 
+                url('/static/images/banner_transparent_right.png') no-repeat right top / contain;
+	background-color: #ffaf00;
+	color: #210002;
+	display: inline-block;
+	padding: .5em 1.1em;
+	background-clip: padding-box;
+	outline: 1px solid #210002;
+	transition: background-color 0.15s;
+}
+.banner.arrow span {
+    background: url('./banner_transparent_left.png') no-repeat left top / contain, 
+                url('./banner_arrow_transparent_right.png') no-repeat right top / contain;
 }
 
 .flex {
@@ -15,9 +44,11 @@ body {
     min-height: 100%;
     display: flex;
     flex-flow: row nowrap;
-    background-color: green;
-    padding: 5px;
+    background-color: #973700;
+    /*padding: 5px;*/
     margin: 50px;
+    border-radius: 2%;
+    box-shadow: 00px 00px 18px #000;
 }
 
 div.flex > div {
@@ -27,11 +58,13 @@ div.flex > div {
 }
 
 #child-left {
+    background-color: #973700;
+    box-shadow: 00px 00px 18px #000;
+    border-radius: 2%;
     flex: 1 1 83%;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
-    background-color: tan;
 }
 
 #child-left > #finish-line {
@@ -63,10 +96,12 @@ div.flex > div {
 }
 
 #child-left > #flex-conta > #image-here {
+    align-self: center;
     order: 2;
     flex: 1 1 90%;
     background-color: green;
 }
+
 
 #child-left > #flex-conta > #arrow-here {
     align-self: center;
@@ -88,7 +123,6 @@ div.flex > div {
 #child-right {
     padding: 2%;
     flex: 1 1 10%;
-    background-color: brown;
     display: flex;
     align-items: center;
 }

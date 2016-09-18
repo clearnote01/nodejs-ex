@@ -50,7 +50,7 @@ var db = null,
     upass = null;
 
 var initDb = function(callback) {
-  //mongoURL = 'mongodb://localhost:27017/test';
+  mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -95,34 +95,7 @@ var loginfailcallback = function(res, failmessage) {
 var userlogincallback = function(res,user_result) {
   //console.log('USER RESULT');
   //console.log(user_result);
-  dbmaintainservice(user_result, function() {
-    console.log('Date updated');
-    res.redirect('/main');
-  });
-}
-
-var dbmaintainservice = function(user_result, callback) {
-  // Set current date in document
-  var cur_date = Date.now();
-  console.log('Date today', cur_date);
-  //cur_date = new Date(cur_date+25*60*60*100);
-  var join_date = user_result.when_it_all_started;
-  //join_date = new Date(join_date);
-  console.log('Date 1st day', join_date);
-  
-  var cur_day = Math.floor((((cur_date - join_date)/(24*60*60*1000))+1)) 
-  //var cur_day =  new Date(cur_date-join_date).getDate();
-  console.log('Day today: ',cur_day);
-  // Update in database 
-  db.collection('profiles').updateOne(
-    {
-      'username': user_result.username
-    },
-    {
-      $set: {'cur-day': cur_day}
-    },
-    callback
-  );
+  res.redirect('/main');
 }
 
 // Routes are defined here!!
@@ -152,12 +125,14 @@ app.post('/login', urlEncodedParser, function(req, res) {
   }
   if (db) {
     console.log(req.body);
-    uname = req.body.logname;
-    upass = req.body.logpass;
+    //uname = req.body.logname;
+    //upass = req.body.logpass;
+    //console.log("USER NAME: " + uname);
+    //console.log("PASSWORD: " + upass);
 
-    var failloginmessage = 'wrong username or password. try again';
-    //login everything;
-    getUserInfo(uname, upass, res, userlogincallback, loginfailcallback, failloginmessage);
+    //var failloginmessage = 'wrong username or password. try again';
+    ////login everything;
+    //getUserInfo(uname, upass, res, userlogincallback, loginfailcallback, failloginmessage);
   }
 });
 
@@ -227,21 +202,6 @@ app.post('/signup', urlEncodedParser, function(req, res) {
           'name': 'food',
           'val': null,
           'text': 'How much did you eat today'
-        },
-        { 
-          'name': 'alcohol',
-          'val': null,
-          'text': 'How much did you drink today'
-        },
-        { 
-          'name': 'caffeine',
-          'val': null,
-          'text': 'How much coffee did you drink today'
-        },
-        { 
-          'name': 'funhrs',
-          'val': null,
-          'text': 'How much fun did you have today (hrs)'
         }
       ],
       'when_it_all_started': Date.now(),
@@ -249,7 +209,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
         { 
           'name': 'weight',
           'val': null,
-          'text': ''
+          'text': 'What is your weight'
         },
         { 
           'name': 'height',
@@ -257,9 +217,19 @@ app.post('/signup', urlEncodedParser, function(req, res) {
           'text': 'What is your height'
         },
         { 
+          'name': 'wife',
+          'val': null,
+          'text': 'What is your wife'
+        },
+        { 
           'name': 'job',
           'val': null,
           'text': 'What is your job'
+        },
+        { 
+          'name': 'gender',
+          'val': null,
+          'text': 'what is your gender (m/f)'
         },
         { 
           'name': 'age',
@@ -269,7 +239,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
       ],
       'answer_existing': [
         { 
-          'name': 'stresslevel',
+          'name': 'happiness',
           'val': null,
           'text': 'What is your happiness'
         },
@@ -279,34 +249,9 @@ app.post('/signup', urlEncodedParser, function(req, res) {
           'text': 'What is your working hrs'
         },
         { 
-          'name': 'smoke',
+          'name': 'sadness',
           'val': null,
           'text': 'What is your sadness'
-        },
-        { 
-          'name': 'junkfood',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'insomnia',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'food',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'alcohol',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'caffeine',
-          'val': null,
-          'text': 'What is your funhrs'
         },
         { 
           'name': 'funhrs',
@@ -316,7 +261,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
       ],
       'answer_existing_cum': [
         { 
-          'name': 'stresslevel',
+          'name': 'happiness',
           'val': null,
           'text': 'What is your happiness'
         },
@@ -326,34 +271,9 @@ app.post('/signup', urlEncodedParser, function(req, res) {
           'text': 'What is your working hrs'
         },
         { 
-          'name': 'smoke',
+          'name': 'sadness',
           'val': null,
           'text': 'What is your sadness'
-        },
-        { 
-          'name': 'junkfood',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'insomnia',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'food',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'alcohol',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'caffeine',
-          'val': null,
-          'text': 'What is your funhrs'
         },
         { 
           'name': 'funhrs',
@@ -361,8 +281,8 @@ app.post('/signup', urlEncodedParser, function(req, res) {
           'text': 'What is your funhrs'
         }
       ],
-      'cur-day': 0,
-      'finish-day': 1000,
+      'nth-day': 0,
+      'the-day': 1000,
       'ques_index': 0,
       'ques_exist_index': 0
     });

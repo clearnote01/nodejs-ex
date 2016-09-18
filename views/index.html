@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="/static/css/camponav.css" type="text/css" media="screen" charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="/static/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="/static/css/loginform.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	</head>
 	<body class="firewatch launch withxbone">
-				<ul class="navbar-top">
+    <ul class="navbar-top">
       <li id="nav-company"><a href=""><strong>FitMeUp!</strong></a></li>
 			<!-- THESE MUST GO IN REVERSE ORDER BECAUSE CSS IS DUMB SOMETIMES -->
 			<li id="nav-review"><a ><strong><span id="loginlink2" class="collapse">Log  in</span>
@@ -27,7 +28,7 @@
 			<li id="nav-game" class=" current"><a href=""><span class="collapse">Begin: </span><strong>Play!</strong></a></li>
 		</ul>		<script type="text/javascript">document.getElementById("nav-game").className += " current";</script>
     <div style="min-height: 150px"></div>
-
+    <!--Main Page-->
 		<div id="page">
 			<div id="maincontain"><div id="main">
 				<div class="section pressquote big first">
@@ -56,7 +57,7 @@
             <button type="submit">Submit</button>
           </form>
         </div>
-          <br><br>
+        <br><br>
         <div class="section pressquote big first">
           <h2>"What does FitmeUp do!"</h2>
         </div>
@@ -81,12 +82,12 @@
 					</div>
 				</div>
 				<div class="section internallinks">
-          <ul class="links smalllinks dim">
-            <li class="link merchandise"><a href="">
-              <h3>Campo Santo Store</h3>
-              <h4 class="banner"><span>Merchandise</span></h4>
-            </a></li>
-          </ul>
+          <!--<ul class="links smalllinks dim">-->
+            <!--<li class="link merchandise"><a href="">-->
+              <!--<h3>Campo Santo Store</h3>-->
+              <!--<h4 class="banner"><span>Merchandise</span></h4>-->
+            <!--</a></li>-->
+          <!--</ul>-->
 					<ul class="links smalllinks dim">
 						<li class="link media"><a href="">
 							<h4 class="banner"><span>Screens &amp; Trailers</span></h4>
@@ -100,41 +101,40 @@
 					<h2>"As visually striking <br>as its unique premise."</h2>
 					<h3>Entertainment Weekly</h3>
 				</div>
-				<div class="section support">
-					<ul class="supportlinks smalllinks dim">
-						<li class="link techsupport"><a href="">
-							<h4 class="banner"><span>Tech Support</span></h4>
-						</a></li>
-						<li class="link streaming"><a href="">
-							<h4 class="banner"><span>Streaming &amp; Let's Plays</span></h4>
-						</a></li>
-					</ul>
-				</div>
+				<!--<div class="section support">-->
+					<!--<ul class="supportlinks smalllinks dim">-->
+						<!--<li class="link techsupport"><a href="">-->
+							<!--<h4 class="banner"><span>Tech Support</span></h4>-->
+						<!--</a></li>-->
+						<!--<li class="link streaming"><a href="">-->
+							<!--<h4 class="banner"><span>Streaming &amp; Let's Plays</span></h4>-->
+						<!--</a></li>-->
+					<!--</ul>-->
+				<!--</div>-->
 				<div class="section copyright">
 					<p>©<span id="year">2016</span> Campo Santo, in cooperation with Panic.</p>
 					<p>Firewatch is a trademark of Campo Santo.</p>
 				</div>
-				<div class="section companylinks">
-					<ul class="companies">
-						<li class="campo"><a href="">
-							<h1>Campo Santo</h1>
-						</a></li>
-						<li class="panic"><a href="">
-							<h1>Panic</h1>
-						</a></li>
-					</ul>
-				</div>
-			</div></div>
+				<!--<div class="section companylinks">-->
+					<!--<ul class="companies">-->
+						<!--<li class="campo"><a href="">-->
+							<!--<h1>Campo Santo</h1>-->
+						<!--</a></li>-->
+						<!--<li class="panic"><a href="">-->
+							<!--<h1>Panic</h1>-->
+						<!--</a></li>-->
+					<!--</ul>-->
+				<!--</div>-->
 		</div>
-        <div class="row">
-          <section class='col-xs-12 col-sm-6 col-md-6'>
-            <section>
-              <h2>How to use this example application</h2>
-                <p>Page view count:
-                <% if (pageCountMessage) { %>
-                   <span class="code" id="count-value"><%=pageCountMessage%></span>
-                   </p>
-                    <div class="code"><h3>DB Connection Info:</h3>
+    <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+    <div class="row">
+      <section class='col-xs-12 col-sm-6 col-md-6'>
+          <h2>How to use this example application</h2>
+            <p>Page view count:
+              <% if (pageCountMessage) { %>
+               <span class="code" id="count-value"><%=pageCountMessage%></span>
+             </p>
+                  <div class="code"><h3>DB Connection Info:</h3>
                       <table style='margin-left: 20px'>
                           <tr><td>Type:</td><td><%= dbInfo.type %></td></tr>
                           <tr><td>URL:</td><td><%= dbInfo.url %></td></tr>
@@ -144,15 +144,16 @@
                    <span class="code" id="count-value">No database configured</span>
                    </p>
                 <%} %>
-          </section>
-        </div>
+      </section>
+    </div>
 		<script type="text/javascript" src="/static/js/jquery-1.12.0.min.js"></script>
 		<script type="text/javascript" src="/static/js/jquery-migrate-1.2.1.min.js"></script>
 		<!--<script type="text/javascript" src="./camp_files/magnific.js"></script>-->
 		<script type="text/javascript" src="/static/js/firewizard.js"></script>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			$("#year").text((new Date).getFullYear());
-		});
+      $(document).ready(function(){
+        $("#year").text((new Date).getFullYear());
+      });
 		</script>
-</body><div></div></html>
+  </body>
+</html>
