@@ -49,6 +49,12 @@ var db = null,
     uname = null,
     upass = null;
 
+var quotes = [
+	'Eat good',
+	'Don\'t die',
+	'Stay hungry, stay foolish'
+]
+
 var initDb = function(callback) {
   //mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
@@ -82,22 +88,28 @@ var getUserInfo = function (db_uname,db_password, res, loginsuccesscallback, log
     }
     else {
       user_result = result[0];
-      loginsuccesscallback(res, user_result);
+      loginsuccesscallback(res);
     }
   });
   return user_result;
 }
 
 var loginfailcallback = function(res, failmessage) {
-  res.end(failmessage);
+  res.end('fail');
 }
 
-var userlogincallback = function(res,user_result) {
-  //console.log('USER RESULT');
-  //console.log(user_result);
-  dbmaintainservice(user_result, function() {
+var userlogincallback = function(res) {
+  dbmaintainservice(user_result, function(err, result) {
     console.log('Date updated');
-    res.redirect('/main');
+    db.collection('profiles').find({
+      'username':user_result.username,
+      'password':user_result.password
+      })
+    .toArray(function(err,result) {
+      user_result = result[0];
+      //console.log(user_result);
+      res.redirect('/main');
+    });
   });
 }
 
@@ -151,7 +163,7 @@ app.post('/login', urlEncodedParser, function(req, res) {
     initDb(function(err){});
   }
   if (db) {
-    console.log(req.body);
+    //console.log(req.body);
     uname = req.body.logname;
     upass = req.body.logpass;
 
@@ -161,7 +173,16 @@ app.post('/login', urlEncodedParser, function(req, res) {
   }
 });
 
+//app.post('/justtest', urlEncodedParser, function(req,res) {
+  //console.log(req.body);
+  //if (req.body.nui == 'hello') {
+    //req.body.success = 1;
+  //}
+  //res.send(req.body);
+//});
+
 app.post('/signup', urlEncodedParser, function(req, res) {
+  console.log("POST",req.body);
   user_result = null;
   if (!db) {
     initDb(function(err){});
@@ -364,13 +385,25 @@ app.post('/signup', urlEncodedParser, function(req, res) {
       'cur-day': 0,
       'finish-day': 1000,
       'ques_index': 0,
-      'ques_exist_index': 0
+      'ques_exist_index': 0,
+      'fitness_score':0
     });
     res.end(failmessage);
   }
-  var failloginmessage = 'Happy sign-in new user!!';
-  getUserInfo(uname, upass, res, userlogincallback, loginfaildosignup, failloginmessage);
-  }
+  var failloginmessage = 'Hello '+uname+', Please login to continue';
+  //getUserInfo(uname, upass, res, userlogincallback, loginfaildosignup, failloginmessage);
+  
+  //Already registered?
+  db.collection('profiles').find({'username':uname}).toArray(function(err,result) {
+    if (result.length == 0) {
+      loginfaildosignup(res,failloginmessage);
+    }
+    else {
+      console.log(result[0].password);
+      res.end('You are already registered. You should log in!');
+    }
+  });
+}
 });
 
 app.get('/test2', function(req, res) {
@@ -387,8 +420,8 @@ app.get('/test2', function(req, res) {
 
 app.get('/main', function(req,res) {
   if (user_result) {
-    console.log(JSON.stringify(user_result));
-    res.render('mainn.html', { username: user_result.username, userresult: JSON.stringify(user_result) });
+    //console.log(JSON.stringify(user_result));
+    res.render('mainn.html', { username: user_result.username, cur_day: user_result['cur-day'], userresult: JSON.stringify(user_result) });
   }
   else {
     res.redirect('/');
@@ -458,14 +491,17 @@ io.on('connection', function(socket) {
     var i_counter = user_result.ques_index;
     var repeat_counter = user_result.ques_exist_index;
     var question_exist_len = user_result.question_existing.length;
-    console.log(question_new_len);
-    console.log(user_result.question_existing);
-    // This is the initial setup. For new signup users
+		// Send a question from list, only if questions to ask are all complete
+		setInterval(function() {
+			if (repeat_counter >= question_exist_len) {
+				socket.emit('a-quote', quotes[Math.floor(Math.random()*quotes.length)]);
+			}
+		}, 50000);
+		// A new signup user comes in
     if (i_counter < question_new_len) {
-        console.log('question sent: '+user_result.question_new[i_counter].name); 
-      console.log(user_result.question_new);
       socket.emit('new_ques', user_result.question_new[i_counter].text);
-    }
+		}
+		// The user has already answered signup questions!
     else {
       if (repeat_counter < question_exist_len) {
         socket
@@ -473,6 +509,7 @@ io.on('connection', function(socket) {
           .text);
       }
     }
+		// Got an answer to question. check whose answer it is!
     socket.on('ques-ans', function(msg) {
       if (i_counter < question_new_len ) {
         i_counter += 1;

@@ -48,6 +48,9 @@ $(document).ready(function() {
   socket.on('new_ques', function(msg) {
     botnewmsg(msg);
   });
+  socket.on('a-quote', function(msg) {
+    botnewmsg(msg);
+  });
   //$('#nick-form').submit(function() {
     //$('#nick-form').hide();
     //socket.emit('new-user', my_nick);

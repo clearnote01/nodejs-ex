@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/css/fonts.css">
 		<link rel="stylesheet" type="text/css" href="/static/css/game_page.css">
     <link rel="stylesheet" type="text/css" href="/static/css/loginform.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	</head>
 	<body class="firewatch launch withxbone">
 				<ul class="navbar-top">
@@ -33,11 +34,20 @@
 
     <div class="flex">
       <div style="" id="child-left">
-        <div id="finish-line"><h4 class="banner"><span>Finish line: 40days</span></h4></div>
+        <!--<div id="finish-line"><h4 class="banner"><span>Finish line: 40days</span></h4></div>-->
+        <div id="finish-line">
+          <h2>Finish line: <span><em>100</span>Days</em></h2>
+        </div>
         <div id="flex-conta">
-          <div id="cur-date">23th day</div>
-          <div id="image-here"></div>
-          <div id="arrow-here">UP<br><br>DOWN</div>
+          <div id="cur-date">Day: <%=cur_day%></div>
+          <div id="image-here">
+            <%=username%>
+            <img src="/static/images/happychar.gif" alt="char here">
+          </div>
+          <div id="arrow-here">
+            <i class="icon-chevron-up"></i><br><br>
+            <i class="icon-chevron-down"></i>
+          </div>
         </div>
         <div id="stats">
           <div class="stat">stat 1</div>
@@ -89,8 +99,8 @@
 			$("#year").text((new Date).getFullYear());
 		});
 		</script>
-            <script type="text/javascript" src="/static/js/html5-canvas-game-character-1.js"></script>
-            <script type="text/javascript">
-                prepareCanvas(document.getElementById("image-here"), $('#image-here').width, $('#image-here').height);
-            </script>
+            <!--<script type="text/javascript" src="/static/js/html5-canvas-game-character-1.js"></script>-->
+            <!--<script type="text/javascript">-->
+                <!--prepareCanvas(document.getElementById("image-here"), $('#image-here').width, $('#image-here').height);-->
+            <!--</script>-->
 </body><div></div></html>
