@@ -29,6 +29,10 @@
 		</ul>		<script type="text/javascript">document.getElementById("nav-game").className += " current";</script>
     <div style="min-height: 150px"></div>
     <!--Main Page-->
+    <!--<form id="justtest" method="post" action="justtest">-->
+      <!--<input id="fuckyou" type="text" name="nui">-->
+    <!--</form>-->
+
 		<div id="page">
 			<div id="maincontain"><div id="main">
 				<div class="section pressquote big first">
@@ -41,7 +45,7 @@
 					<h2 class="banner"><span><em>Begin your adventure now!</em></span></h2>
           <h3><span id="loginbutton" class="highlight" href="">Login</span> or 
             <span id="signupbutton">Signup</span> to begin</h3>
-          <br><br>
+          <h3 id="logsignmsg" style="color: #973700; font-weight: 100; font-size:0.8em;"><br></h4>
           <form id="login" class="loginform" action="/login" method="post">
             Username: <input autocomplete="off" type="text" name="logname" placeholder="" required>
             <br><br>
@@ -49,7 +53,7 @@
             <br><br>
             <button type="submit">Submit</button>
           </form>
-          <form id="signup" class="loginform" method="post" action="/signup">
+          <form id="signup" class="loginform" method="" action="">
             Select a name: <input autocomplete="off" type="text" name="signname" placeholder="" required>
             <br><br>
             Select a password: <input autocomplete="off" type="password" name="signpass" placeholder="" required>
