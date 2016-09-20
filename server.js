@@ -56,7 +56,7 @@ var quotes = [
 ]
 
 var initDb = function(callback) {
-  mongoURL = 'mongodb://localhost:27017/test';
+  //mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
