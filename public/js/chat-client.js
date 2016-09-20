@@ -52,6 +52,22 @@ $(document).ready(function() {
   socket.on('a-quote', function(msg) {
     botnewmsg(msg);
   });
+  socket.on('reload-charts', function(msg) {
+    reloadCharts(msg);
+    //botnewmsg(msg);
+  });
+
+  function reloadCharts(data) {
+    let stats = JSON.parse(data);
+    //Finish day update
+    $('#finish-date').text(stats['finish-day']);
+    //Fitness score
+    let fitnessScore = stats['fitness_score'];
+    console.log('Fitness score', fitnessScore);
+    $('#fitness-score').text(fitnessScore);
+    //Update stats
+  }
+
   //$('#nick-form').submit(function() {
     //$('#nick-form').hide();
     //socket.emit('new-user', my_nick);

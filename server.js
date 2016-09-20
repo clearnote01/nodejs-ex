@@ -1,6 +1,7 @@
 //  OpenShift sample Node application
 var express = require('express'),
     fs      = require('fs'),
+    request = require('request'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan'),
@@ -55,7 +56,7 @@ var quotes = [
 ]
 var initDb = function(callback) {
 
-  //mongoURL = 'mongodb://localhost:27017/test';
+  mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
   var mongodb = require('mongodb');
   if (mongodb == null) return;
@@ -106,6 +107,7 @@ var userlogincallback = function(res) {
     .toArray(function(err,result) {
       user_result = result[0];
       //console.log(user_result);
+        //console.log(user_result);
       res.redirect('/main');
     });
   });
@@ -119,17 +121,24 @@ var dbmaintainservice = function(user_result, callback) {
   var join_date = user_result.when_it_all_started;
   //join_date = new Date(join_date);
   console.log('Date 1st day', join_date);
-  
+  var yesterday = user_result['cur-day'];
+  var ctr = 0;
   var cur_day = Math.floor((((cur_date - join_date)/(24*60*60*1000))+1)) 
   //var cur_day =  new Date(cur_date-join_date).getDate();
   console.log('Day today: ',cur_day);
+  //if ( yesterday == cur_day ) {
+    //ctr = user_result.ques_exist_index;
+  //}
+  
   // Update in database 
   db.collection('profiles').updateOne(
     {
       'username': user_result.username
     },
     {
-      $set: {'cur-day': cur_day}
+      $set: {'cur-day': cur_day,
+      // DEbatable behaviour
+      'ques_exist_index': ctr}
     },
     callback
   );
@@ -156,7 +165,7 @@ app.get('/', function (req, res) {
 
 app.post('/login', urlEncodedParser, function(req, res) {
   //console.log('page opene!');
-  user_result = null;
+  //user_result = null;
   if (!db) {
     initDb(function(err){});
   }
@@ -181,7 +190,7 @@ app.post('/login', urlEncodedParser, function(req, res) {
 
 app.post('/signup', urlEncodedParser, function(req, res) {
   console.log("POST",req.body);
-  user_result = null;
+  //user_result = null;
   if (!db) {
     initDb(function(err){});
   }
@@ -333,53 +342,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
           'text': 'What is your funhrs'
         }
       ],
-      'answer_existing_cum': [
-        { 
-          'name': 'stresslevel',
-          'val': null,
-          'text': 'What is your happiness'
-        },
-        { 
-          'name': 'workhrs',
-          'val': null,
-          'text': 'What is your working hrs'
-        },
-        { 
-          'name': 'smoke',
-          'val': null,
-          'text': 'What is your sadness'
-        },
-        { 
-          'name': 'junkfood',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'insomnia',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'food',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'alcohol',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'caffeine',
-          'val': null,
-          'text': 'What is your funhrs'
-        },
-        { 
-          'name': 'funhrs',
-          'val': null,
-          'text': 'What is your funhrs'
-        }
-      ],
+      'answer_existing_cum': 100000,
       'cur-day': 0,
       'finish-day': 1000,
       'ques_index': 0,
@@ -444,7 +407,7 @@ app.get('/pagecount', function (req, res) {
 
 app.get('/deldb', function(req, res) {
   db.collection('profile').drop(function(err,result) {
-      user_result = null;
+      //user_result = null;
       console.log('Dropped table');
       console.log(err);
       console.log(JSON.stringify(result));
@@ -462,10 +425,6 @@ initDb(function(err){
 });
 
 // Socket works
-var users = [];
-var msgs = [];
-var msgs_length = 0;
-var user_by_id = {};
 var bot_msg = {
   name: 'bot',
   msg: 'message received'
@@ -486,8 +445,43 @@ var increment_ques_exist_index = function(username, new_index, callback) {
   );
 }
 
-var maintain_database = function() {
-  console.log('all regular database work go here!');
+var calculateCumulativeScore = function(callback,arg) {
+  var urlForThis = 'http://127.0.0.1:4000/cum';
+  var data = user_result;
+  delete data.password;
+  console.log(data);
+  request({
+      uri: urlForThis,
+      method: 'POST',
+      json: data
+  }, function(err, resp, body) {
+    var fitness_score = resp.body.fitness_score;
+    var answer_existing_cum = resp.body.answer_existing_cum;
+    var finish_day = resp.body['finish-day'];
+    console.log('FITNESS SCORE', fitness_score);
+    db.collection('profiles').updateOne(
+      {'username': user_result.username},
+      {
+        $set: {
+          'fitness_score': fitness_score,
+          'answer_existing_cum': answer_existing_cum,
+          'finish-day': finish_day
+        }
+      },
+      function() {
+        reloadDb(callback,arg);
+      }
+    );
+  });
+  console.log(user_result);
+}
+
+var reloadDb = function(callback,arg) {
+  db.collection('profiles').find({'username':user_result.username}).toArray(function(err,result) {
+    user_result = result[0];
+    console.log('UPDATED PROFILE',user_result);
+    callback(arg);
+  });
 }
 
 io.on('connection', function(socket) {
@@ -497,6 +491,15 @@ io.on('connection', function(socket) {
     var i_counter = user_result.ques_index;
     var repeat_counter = user_result.ques_exist_index;
     var question_exist_len = user_result.question_existing.length;
+    if (user_result.answer_existing_cum) {
+      socket.emit('reload-charts', JSON.stringify(
+            {
+              'fitness_score':user_result.fitness_score,
+              'stats':user_result.answer_existing_cum,
+              'finish-day':user_result['finish-day']
+            }
+      ));
+    }
 		// Send a question from list, only if questions to ask are all complete
 		setInterval(function() {
 			if (repeat_counter >= question_exist_len) {
@@ -516,7 +519,7 @@ io.on('connection', function(socket) {
             .text);
         }
       }
-    }, 1000);
+    }, 10);
 		// Got an answer to question. check whose answer it is!
     socket.on('ques-ans', function(msg) {
       if (i_counter < question_new_len ) {
@@ -541,7 +544,7 @@ io.on('connection', function(socket) {
                 .emit('new_ques', user_result.question_existing[repeat_counter]
                 .text);
             }
-          }, 3000);
+          }, 10);
         });
       }
       else {
@@ -554,13 +557,36 @@ io.on('connection', function(socket) {
                 socket.emit('new_ques', user_result.question_existing[repeat_counter].text);
               }
             });
+            if ( repeat_counter >= question_exist_len) {
+              console.log('questions answered all');
+              socket.emit('a-quote', 'Thankyou for taking time to answer the questions. Wait a second till we crunch numbers and update stats for you :)');
+              calculateCumulativeScore(function() {
+                socket.emit('reload-charts', JSON.stringify(
+                  {
+                    'fitness_score':user_result.fitness_score,
+                    'stats':user_result.answer_existing_cum,
+                    'finish-day':user_result['finish-day']
+                  }
+                ));
+                console.log('Signal emitted: reload-charts');
+              }, socket);
+            }
           }
-        }, 3000);
-        //This the 
+        }, 10);
       }
     });
+
+    //Musings of a disfunctional human: Nobody will see this, nobody will feel what I feel now.
+    //It has been an awesome experience working on this. This is literally the biggest thing I have
+    //ever done; both in scope of the amount of codes and in concept. I have learnt a lot but still
+    //have a long way to go. I hope I can continue to feel so good when I am doing stuffs like this.
+    //But nobody can say what the future really has in store, right? Though what I do know is that
+    //having fun in what you do is important and so I hope I can continue to enjoy my life as such.
+    //Even though I am usually an idiot with dead-fish eyes and slightest of unease makes me depressed
+    //at times like these I truly feel alive. I hope this won't end, ever.
   }
   socket.on('disconnect', function() {
+    //user_result = null;
     console.log('Disconnect by client '+socket.id); 
   });
 });

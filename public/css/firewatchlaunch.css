@@ -8,11 +8,27 @@ a, a:link, a:visited { color: inherit; text-decoration: inherit; }
 	vertical-align: baseline;
 }
 
+::-webkit-scrollbar
+{
+  width: 4px;  [> for vertical scrollbars <]
+  height: 12px; [> for horizontal scrollbars <]
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgb(151,55,0);
+}
 
 
 html {
-	background-color: #210002;
+	/*background-color: #210002;*/
 	color: #ffaf00;
+    background-color: #440D0F;
 	font-family: 'Verlag A', 'Verlag B', "Verlag";
 	font-weight: 300;
 	font-style: normal;
@@ -86,7 +102,8 @@ s:before {
 }
 
 #maincontain {
-	background-color: #210002;
+	/*background-color: #210002;*/
+    background-color: #440D0F;
 	position: relative;
 	z-index: 98;
 }
@@ -97,11 +114,14 @@ s:before {
 
 
 #main {
-	max-width: 900px;
+	max-width: 1000px;
 	padding-left: 30px;
 	padding-right: 30px;
+    padding-top: 50px;
+    padding-bottom: 60px;
 	margin-left: auto;
 	margin-right: auto;
+    margin-bottom: 130px;
 	z-index: 99;
 	position: relative;
 	background-color: #210002;
