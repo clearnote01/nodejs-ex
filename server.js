@@ -56,7 +56,7 @@ var quotes = [
 ]
 
 var initDb = function(callback) {
-  //mongoURL = 'mongodb://localhost:27017/test';
+  mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -200,7 +200,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
         { 
           'name': 'weight',
           'val': null,
-          'text': 'What is your weight (in kgs)'
+          'text': 'What is your weight in ggggggggggggggggggggggggggggggggggggg is your weight (in kgs)'
         },
         { 
           'name': 'height',
@@ -444,6 +444,14 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
+app.get('/deldb', function(req, res) {
+  db.collection('profile').drop(function(err,result) {
+      user_result = null;
+      console.log('Dropped table');
+      console.log(err);
+      console.log(JSON.stringify(result));
+  });
+});
 
 // error handling
 app.use(function(err, req, res, next){
@@ -544,6 +552,7 @@ io.on('connection', function(socket) {
             }
           });
         }
+        //This the 
       }
     });
   }

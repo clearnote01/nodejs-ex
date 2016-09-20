@@ -181,11 +181,14 @@ div.flex > div {
 }
 
 #chat-box > #msg-box > .msg {
-    flex: 1 1 10%;
+    flex: 1 1 30%;
     color: black;
     margin: 20px;
     background-color: gray;
-    min-height: 40px;
+    min-height: 80px;
+    /*max-width: 180px;*/
+    padding: 10px;
+    /*min-height: 140px;*/
 }
 
 #chat-box > #msg-box > .msg-bot {
@@ -202,11 +205,13 @@ div.flex > div {
     margin-top: auto;
     background-color: gray;
     color: black;
+    min-height: 80px;
 }
 
 #txt-box > input {
     width: 80%;
-}
+    min-height: 80px;
+}`
 
 @media only screen and (max-width: 450px) {
     #child-left > #stats {

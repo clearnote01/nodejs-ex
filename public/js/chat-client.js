@@ -23,11 +23,12 @@ $(document).ready(function() {
   }
   function scrollLast() {
     //var lastchild = $('#msg-box :last-child');
-    var lastchild = $('.msg:last-child');
-    console.log(lastchild[0]);
-    $('#msg-box').animate({
-      scrollTop: lastchild.offset().top
-    }, 1);
+    //var lastchild = $('.msg:last-child');
+    //console.log(lastchild[0]);
+    //$('#msg-box').animate({
+      //scrollTop: lastchild.offset().top
+    //}, 1);
+    $('#msg-box').scrollTop($('#msg-box')[0].scrollHeight);
   }
 
   $('#txt-form').submit(function() {
