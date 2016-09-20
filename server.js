@@ -200,34 +200,34 @@ app.post('/signup', urlEncodedParser, function(req, res) {
         { 
           'name': 'weight',
           'val': null,
-          'text': 'What is your weight in ggggggggggggggggggggggggggggggggggggg is your weight (in kgs)'
+          'text': 'Mr.Fitty has some friends that are too heavy to handle :). But I love them. What is your weight (in kgs) ?'
         },
         { 
           'name': 'height',
           'val': null,
-          'text': 'What is your height (in inches)'
+          'text': 'What is your height (in inches) ?. We just need this once. We would not trouble you again bud. '
         },
         { 
           'name': 'job',
           'val': null,
-          'text': 'How happy are you with your work (1:None, 2:Low, 3:Moderate, 4:High'
+          'text': 'A \'very\' direct question. You know people who love their work, live longer than the turtle. At least their work does. How happy are you with your work. Donot worry if you are not too happy. Let other factors fill you up then'
         },
         { 
           'name': 'age',
           'val': null,
-          'text': 'what is your age (yrs)'
+          'text': 'what is your age (yrs) ?'
         }
       ],
       'question_existing': [
         { 
           'name': 'stresslevel',
           'val': null,
-          'text': 'How much stress you feel today!'
+          'text': 'How much stress you feel today!. Donot get all itchy. Answer me. Donot suppose that stress is a bad thing. Stress is bad to those who think it is bad. For others and me, it is just normal.'
         },
         { 
           'name': 'workhrs',
           'val': null,
-          'text': 'How much work did you work today'
+          'text': 'How much work did you do today? Would like if you quantize it in hrs. :). I am a bit lazy at working things on my own. But I learn!.'
         },
         { 
           'name': 'smoke',
@@ -237,32 +237,32 @@ app.post('/signup', urlEncodedParser, function(req, res) {
         { 
           'name': 'junkfood',
           'val': null,
-          'text': 'How much junk did you take today!'
+          'text': 'Oho!. So, Mr.Foody. or Mrs.Foody. Mind not if you are not. Junk Food today?'
         },
         { 
           'name': 'insomnia',
           'val': null,
-          'text': 'Did you have any trouble sleeping yesterday'
+          'text': 'Did you have any trouble sleeping yesterday?. Sleep is like the fuel of your body.'
         },
         { 
           'name': 'food',
           'val': null,
-          'text': 'How much did you eat today'
+          'text': 'How much did you eat today ?. Were on a party tonight?'
         },
         { 
           'name': 'alcohol',
           'val': null,
-          'text': 'How much did you drink today'
+          'text': 'How much did you drink today? Alcohol is a very addictive but unhealthy :P'
         },
         { 
           'name': 'caffeine',
           'val': null,
-          'text': 'How much coffee did you drink today'
+          'text': 'How much coffee did you drink today? I mean amount of caffiene'
         },
         { 
           'name': 'funhrs',
           'val': null,
-          'text': 'How much fun did you have today (hrs)'
+          'text': 'How much fun did you have today (hrs)?'
         }
       ],
       'when_it_all_started': Date.now(),
