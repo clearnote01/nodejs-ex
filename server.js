@@ -48,17 +48,15 @@ var db = null,
     user_result = null,
     uname = null,
     upass = null;
-
 var quotes = [
 	'Eat good',
 	'Don\'t die',
 	'Stay hungry, stay foolish'
 ]
-
 var initDb = function(callback) {
+
   //mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
-
   var mongodb = require('mongodb');
   if (mongodb == null) return;
 
@@ -210,7 +208,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
         { 
           'name': 'job',
           'val': null,
-          'text': 'A \'very\' direct question. You know people who love their work, live longer than the turtle. At least their work does. How happy are you with your work. Donot worry if you are not too happy. Let other factors fill you up then'
+          'text': 'A \'very\' direct question. You know people who love their work, live longer than the turtle. At least their work does. How happy are you with your work?'
         },
         { 
           'name': 'age',
@@ -222,7 +220,7 @@ app.post('/signup', urlEncodedParser, function(req, res) {
         { 
           'name': 'stresslevel',
           'val': null,
-          'text': 'How much stress you feel today!. Donot get all itchy. Answer me. Donot suppose that stress is a bad thing. Stress is bad to those who think it is bad. For others and me, it is just normal.'
+          'text': 'How much stress you feel today!. Donot get all itchy. You know acceptance is the first step to solve your problem right? :)'
         },
         { 
           'name': 'workhrs',
@@ -506,17 +504,19 @@ io.on('connection', function(socket) {
 			}
 		}, 50000);
 		// A new signup user comes in
-    if (i_counter < question_new_len) {
-      socket.emit('new_ques', user_result.question_new[i_counter].text);
-		}
-		// The user has already answered signup questions!
-    else {
-      if (repeat_counter < question_exist_len) {
-        socket
-          .emit('new_ques', user_result.question_existing[repeat_counter]
-          .text);
+    setTimeout(function() {
+      if (i_counter < question_new_len) {
+        socket.emit('new_ques', user_result.question_new[i_counter].text);
       }
-    }
+      // The user has already answered signup questions!
+      else {
+        if (repeat_counter < question_exist_len) {
+          socket
+            .emit('new_ques', user_result.question_existing[repeat_counter]
+            .text);
+        }
+      }
+    }, 1000);
 		// Got an answer to question. check whose answer it is!
     socket.on('ques-ans', function(msg) {
       if (i_counter < question_new_len ) {
@@ -526,32 +526,36 @@ io.on('connection', function(socket) {
           //console.log('Updated counter');
           //console.log('Update mongo with msg!'+msg);
           console.log('Answer received: '+user_result.question_new[i_counter-1].name);
-          if ( i_counter < question_new_len) {
-            console
-              .log('question sent: '+user_result
-              .question_new[i_counter]
-              .name); 
-            socket
-              .emit('new_ques', user_result.question_new[i_counter]
-              .text);
-          }
-          else {
-            socket
-              .emit('new_ques', user_result.question_existing[repeat_counter]
-              .text);
-          }
+          setTimeout(function() {
+            if ( i_counter < question_new_len) {
+              console
+                .log('question sent: '+user_result
+                .question_new[i_counter]
+                .name); 
+              socket
+                .emit('new_ques', user_result.question_new[i_counter]
+                .text);
+            }
+            else {
+              socket
+                .emit('new_ques', user_result.question_existing[repeat_counter]
+                .text);
+            }
+          }, 3000);
         });
       }
       else {
         //This the next level of setup! For existing users!
-        if (repeat_counter < question_exist_len) {
-          repeat_counter += 1;
-          increment_ques_exist_index(user_result.username, repeat_counter,function() {
-            if (repeat_counter < question_exist_len) {
-              socket.emit('new_ques', user_result.question_existing[repeat_counter].text);
-            }
-          });
-        }
+        setTimeout(function() {
+          if (repeat_counter < question_exist_len) {
+            repeat_counter += 1;
+            increment_ques_exist_index(user_result.username, repeat_counter,function() {
+              if (repeat_counter < question_exist_len) {
+                socket.emit('new_ques', user_result.question_existing[repeat_counter].text);
+              }
+            });
+          }
+        }, 3000);
         //This the 
       }
     });
