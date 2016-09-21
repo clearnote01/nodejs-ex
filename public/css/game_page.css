@@ -83,7 +83,7 @@ div.flex > div {
 
 #child-left {
     /*background-color: #973700;*/
-    box-shadow: 00px 00px 18px #000;
+    /*box-shadow: 00px 00px 18px #000;*/
     background-color: #440D0F;
     border-radius: 2%;
     flex: 1 1 83%;
@@ -97,14 +97,14 @@ div.flex > div {
 #child-left > #finish-line {
     align-self: center;
     /*color: #210002;*/
-    color: #FFAF00;
+    color: #973700;
+    margin-top: 9px;
+    margin-bottom: 7px;
 }
 
-#child-left > #flex-conta > #stats {
-    order: 8;
-    flex: 1 1 10%;
+#stats {
+    /*[>order: 8;<]*/
     /*background-color: pink;*/
-    margin-top: auto;
     /*align-self: flex-end;*/
     display: flex;
     flex-flow: row wrap;
@@ -112,12 +112,14 @@ div.flex > div {
 }
 
 #child-left > #flex-conta {
+    box-shadow: 00px 00px 18px #000;
     flex: 1 1 80%;
     min-height: 500px;
     /*[>background-color: pink;<]*/
     display: flex;
     flex-flow: nowrap;
-    background: url('/static/images/game-bg-1.jpg');
+    background-color: inherit;
+    background: url('/static/images/bg-1.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -126,10 +128,10 @@ div.flex > div {
     align-self: center;
     flex: 1 1 5%;
     /*background-color: red;*/
+    color: #973700;
     order: 1;
-    text-shadow: 4px 4px  9px #213002;
+    /*text-shadow: 4px 4px  9px #213002;*/
     font-weight: 900;
-    color: #FFAF00;
 
 }
 
@@ -141,8 +143,8 @@ div.flex > div {
     min-width: 120px;
     font-weight: 600;
     font-size:1.3em;
-    color: #210002;
-    text-shadow: 1px 1px 8px #210007;
+    color: #973700;
+    /*text-shadow: 1px 1px 8px #210007;*/
     /*background-image: url('/static/images/happychar.png');*/
     /*background-size: 100% 100%;*/
     /*background-color: green;*/
@@ -223,23 +225,57 @@ div.flex > div {
 }
 
 #chat-box > #txt-box{
+    /*DO THIS WILL LOOK COOL*/
+    border-top: 2px #000;
     /*flex: 1 1 10%;*/
     /*align-self: stretch;*/
-    max-height: 80px;
     margin-top: auto;
-    background-color: gray;
-    color: black;
-    min-height: 80px;
+    opacity: 0.4;
+    display: flex;
+    /*margin-bottom: 10px;*/
+    /*margin-top: 10px;*/
+    /*box-shadow: 4px 4px 3px #000;*/
+
 }
 
-#txt-box > input {
-    width: 80%;
-    min-height: 80px;
-}`
+#txt-form {
+    flex: 1 1 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+input {
+    width: 100%;
+    padding: 3px;
+    height: 80%;
+    margin-top: 20px;
+    font-weight: 700;
+    background-color: #973700;
+    border: 0px;
+    color: #FFAF00;
+    border: 1px;
+    border-color: #210002;
+	box-shadow: 0px 1px 1px #ffaf00;
+    color: #973700;
+    background-color: #210002;
+    
+}
+
+#txt-form > button {
+    padding-bottom: 9px;
+    flex: 1 1 40%;
+    color: #973700;
+    border: 0px;
+    background-color: #210002;
+    box-shadow: 4px 4px 3px #000;
+}
 
 @media only screen and (max-width: 450px) {
     #child-left > #stats {
         flex-direction:column;
+    }
+    #chat-box > #txt-box {
+        margin-bottom: 0px;
     }
 }
 @media only screen and (max-width: 830px) {
