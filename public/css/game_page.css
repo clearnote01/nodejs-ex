@@ -72,7 +72,7 @@ h2 {
     /*padding: 5px;*/
     margin: 50px;
     border-radius: 2%;
-    box-shadow: 00px 00px 18px #000;
+    box-shadow: 01px 01px 8px 0px #000;
 }
 
 div.flex > div {
@@ -112,7 +112,9 @@ div.flex > div {
 }
 
 #child-left > #flex-conta {
-    box-shadow: 00px 00px 18px #000;
+    margin-left: 15px;
+    margin-right: 15px;
+    box-shadow: inset 00px 00px 18px #000;
     flex: 1 1 80%;
     min-height: 500px;
     /*[>background-color: pink;<]*/
@@ -122,17 +124,23 @@ div.flex > div {
     background: url('/static/images/bg-1.png');
     background-size: cover;
     background-repeat: no-repeat;
+    padding-left: 10px;
+    padding-right: 4px;
 }
 
 #child-left > #flex-conta > #cur-date {
     align-self: center;
     flex: 1 1 5%;
     /*background-color: red;*/
-    color: #973700;
     order: 1;
     /*text-shadow: 4px 4px  9px #213002;*/
     font-weight: 900;
+    color: #440D0f;
 
+}
+
+#child-left > #flex-conta > #image-here > #name-here {
+    flex: 1 1 100%;
 }
 
 #child-left > #flex-conta > #image-here {
@@ -144,6 +152,10 @@ div.flex > div {
     font-weight: 600;
     font-size:1.3em;
     color: #973700;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
     /*text-shadow: 1px 1px 8px #210007;*/
     /*background-image: url('/static/images/happychar.png');*/
     /*background-size: 100% 100%;*/
@@ -151,6 +163,7 @@ div.flex > div {
     /*box-shadow: 10px 10px 5px #fff;*/
     /*background-size: 100% auto;*/
     /*background-repeat: no-repeat;*/
+    color: #440D0f;
 }
 
 #image-here > img {
@@ -163,13 +176,23 @@ div.flex > div {
     order: 3;
     flex: 1 1 5%;
     /*background-color: yellow;*/
+    padding: 0;
     cursor: pointer;
+    font-weight: 900;
+    transition: all 0.14s linear;
+    font-size: 0.9em;
+    /*color: #213002;*/
+    color: #440D0f;
+    opacity: 0.9;
+    text-shadow: 2px 2px 3px #213002;
 }
 
 #arrow-here > i {
-    text-shadow: 4px 4px  9px #213002;
-    font-weight: 900;
-    color: #210002
+}
+
+#child-left > #flex-conta > #arrow-here:hover {
+    text-shadow: 2px 2px 2px #213002;
+    font-size: 1.05em;
 }
 
 #stats > .stat {
@@ -194,6 +217,7 @@ div.flex > div {
     flex: 1 1 100%;
     /*display: flex;*/
     /*flex-direction: column nowrap;*/
+    box-shadow: inset 1px 1px 13px 0px rgba(0,0,0,0.1);
 }
 
 #chat-box > #msg-box {
@@ -205,6 +229,8 @@ div.flex > div {
 }
 
 #chat-box > #msg-box > .msg {
+    font-size: 0.8em;
+    font-weight: 500;
     flex: 1 1 30%;
     color: #973700;
     margin: 20px;
@@ -225,37 +251,41 @@ div.flex > div {
 }
 
 #chat-box > #txt-box{
+    flex: 1 1 100%;
+    /*flex: 1 1 30%;*/
     /*DO THIS WILL LOOK COOL*/
-    border-top: 2px #000;
+    /*border-top: 2px #000;*/
     /*flex: 1 1 10%;*/
     /*align-self: stretch;*/
-    margin-top: auto;
-    opacity: 0.4;
+    /*margin-top: auto;*/
+    /*opacity: 0.4;*/
     display: flex;
     /*margin-bottom: 10px;*/
     /*margin-top: 10px;*/
-    /*box-shadow: 4px 4px 3px #000;*/
+    flex-flow: column wrap;
+	box-shadow: -1px 1px 1px 3px #210007;
 
 }
 
 #txt-form {
     flex: 1 1 100%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-flow: row wrap;
 }
 
 input {
+    flex: 1 1 100%;
     width: 100%;
-    padding: 3px;
-    height: 80%;
-    margin-top: 20px;
+    min-height: 40px;
+    /*padding: 3px;*/
+    /*margin-top: 20px;*/
     font-weight: 700;
-    background-color: #973700;
     border: 0px;
     color: #FFAF00;
     border: 1px;
     border-color: #210002;
-	box-shadow: 0px 1px 1px #ffaf00;
     color: #973700;
     background-color: #210002;
     
@@ -263,12 +293,23 @@ input {
 
 #txt-form > button {
     padding-bottom: 9px;
+    background-color: #210002;
     flex: 1 1 40%;
     color: #973700;
     border: 0px;
-    background-color: #210002;
-    box-shadow: 4px 4px 3px #000;
 }
+
+#txt-box > button {
+    background-color: #210002;
+    padding-bottom: 9px;
+    flex: 1 1 40%;
+    color: #973700;
+    border: 0px;
+}
+
+#txt-box #play-again {
+}
+
 
 @media only screen and (max-width: 450px) {
     #child-left > #stats {

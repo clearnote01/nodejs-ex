@@ -31,10 +31,25 @@ $(document).ready(function() {
     $('#msg-box').scrollTop($('#msg-box')[0].scrollHeight);
   }
 
+  $('#play-again').click(function() {
+    console.log('Sending signal to restart game');
+    $('#play-again').hide();
+    //$('#play-again').css('display','none');
+    socket.emit('restart','');
+  });
+
+  socket.on('restart-ack', function(msg) {
+    //$('#play-again').hide();
+  });
+
+
   $('#txt-form').submit(function() {
     console.log(username);
     console.log('LIGE');
     msg = $('#txt-msg').val();
+    if (msg.length == 0) {
+      return false;
+    }
     ownnewmsg(msg);
     msg = {
       name: username,
@@ -48,6 +63,8 @@ $(document).ready(function() {
   });
   socket.on('new_ques', function(msg) {
     botnewmsg(msg);
+    $('#play-again').text('Play again?');
+    $('#play-again').hide();
   });
   socket.on('a-quote', function(msg) {
     botnewmsg(msg);
@@ -65,7 +82,9 @@ $(document).ready(function() {
     let fitnessScore = stats['fitness_score'];
     console.log('Fitness score', fitnessScore);
     $('#fitness-score').text(fitnessScore);
+    botnewmsg('Updated your fitmeup stats.');
     //Update stats
+    $('#play-again').css('display','block');
   }
 
   //$('#nick-form').submit(function() {

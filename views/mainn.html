@@ -40,29 +40,29 @@
         <div id="flex-conta">
           <div id="cur-date">Day: <%=cur_day%></div>
           <div id="image-here">
-            <span id="username"><%=username%></span>
-            : <span id="fitness-score">100</span>
             <img src="/static/images/happychar.gif" alt="char here">
+            <div id="name-here">
+              <span id="username"><%=username%></span>
+              : <span id="fitness-score">100</span>
+            </div>
           </div>
           <div id="arrow-here">
             <i class="icon-chevron-up"></i><br><br>
             <i class="icon-chevron-down"></i>
           </div>
         </div>
-        <div id="stats">
-          <div class="stat">stat 1</div>
-          <div class="stat">stat 2</div>
-          <div class="stat">stat 3</div>
-          <div class="stat">stat 4</div>
-          <div class="stat">stat 5</div>
-        </div>
+        <!--<div id="stats">-->
+          <!--<div class="stat">stat 1</div>-->
+          <!--<div class="stat">stat 2</div>-->
+          <!--<div class="stat">stat 3</div>-->
+          <!--<div class="stat">stat 4</div>-->
+          <!--<div class="stat">stat 5</div>-->
+        <!--</div>-->
       </div>
       <div style="" id="child-right">
         <div id="chat-box">
           <div id="msg-box">
             <div id="bot-msg" class="msg msg-bot">This is a message</div>
-            <div class="msg msg-bot">this is a message</div>
-            <div class="msg msg-usr"><p>This is a sdfsaf sd fs df sd f sdf sd f sad f sdf asd f asdf  message</p></div>
             <div class="msg msg-bot">this is a message</div>
             <div class="msg msg-usr">This is a message</div>
             <div class="msg msg-bot">this is a message</div>
@@ -73,8 +73,8 @@
             <form action="" id="txt-form">
               <input autocomplete="off" id="txt-msg" placeholder="|" type="text">
               <button>Submit</button>
-              <!--<button>Send</button>-->
             </form> 
+            <button id="play-again">Start</button>
           </div>
         </div>
       </div>

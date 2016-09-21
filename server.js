@@ -56,7 +56,7 @@ var quotes = [
 ]
 var initDb = function(callback) {
 
-  mongoURL = 'mongodb://localhost:27017/test';
+//  mongoURL = 'mongodb://localhost:27017/test';
   if (mongoURL == null) return;
   var mongodb = require('mongodb');
   if (mongodb == null) return;
@@ -446,7 +446,8 @@ var increment_ques_exist_index = function(username, new_index, callback) {
 }
 
 var calculateCumulativeScore = function(callback,arg) {
-  var urlForThis = 'http://127.0.0.1:4000/cum';
+  //var urlForThis = 'http://127.0.0.1:4000/cum';
+  var urlForThis = 'https://suyash.pythonanywhere.com/api1.0/finalstats';
   var data = user_result;
   delete data.password;
   console.log(data);
@@ -455,6 +456,7 @@ var calculateCumulativeScore = function(callback,arg) {
       method: 'POST',
       json: data
   }, function(err, resp, body) {
+    console.log('THIS IS THE RESPONSE I GOT', resp.body);
     var fitness_score = resp.body.fitness_score;
     var answer_existing_cum = resp.body.answer_existing_cum;
     var finish_day = resp.body['finish-day'];
@@ -491,6 +493,13 @@ io.on('connection', function(socket) {
     var i_counter = user_result.ques_index;
     var repeat_counter = user_result.ques_exist_index;
     var question_exist_len = user_result.question_existing.length;
+
+    socket.on('restart', function(msg) {
+      socket.emit('restart-ack', '');
+      repeat_counter = 0;
+      socket.emit('new_ques', user_result.question_existing[repeat_counter].text);
+    });
+
     if (user_result.answer_existing_cum) {
       socket.emit('reload-charts', JSON.stringify(
             {

@@ -25,8 +25,9 @@ app.post('/cum', jsonParser, function(req,res) {
   //data.fitness_score = 9999;
   data.answer_existing_cum =  {'stat1':10000,'stat2':0,'stat3':0,'stat4':0,'stat5':0};
   data['finish-day'] = Math.floor(Math.random()*1000+1000);
-  data['fitness_score'] = Math.random();
-  console.log(req.body.username);
+  data['fitness_score'] = Math.round(Math.random()*100);
+  //console.log(req.body.username);
+  console.log(req.body);
   res.json(data);
 });
 
