@@ -31,6 +31,16 @@ $(document).ready(function() {
     $('#msg-box').scrollTop($('#msg-box')[0].scrollHeight);
   }
 
+  //var data = {
+    //series: [5, 3, 4]
+  //};
+  //var sum = function(a, b) { return a + b };
+  //new Chartist.Pie('.ct-chart', data, {
+    //labelInterpolationFnc: function(value) {
+      //return Math.round(value / data.series.reduce(sum) * 100) + '%';
+    //}
+  //});
+
   $('#play-again').click(function() {
     console.log('Sending signal to restart game');
     $('#play-again').hide();
